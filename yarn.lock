@@ -5483,11 +5483,6 @@
   dependencies:
     "js-tokens" "^3.0.0 || ^4.0.0"
 
-"lottie-react-native@^6.0.0-rc.7":
-  "integrity" "sha512-8oIFsXcFMEQ1Xc2f6YHO2WN+FjKIFePhJ/vmWRukH7QnMIJFTqD7frG91Qj30l0HQ5W831e/dgz7de2c0CmdyA=="
-  "resolved" "https://registry.npmjs.org/lottie-react-native/-/lottie-react-native-6.0.0-rc.7.tgz"
-  "version" "6.0.0-rc.7"
-
 "lru-cache@^5.1.1":
   "integrity" "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w=="
   "resolved" "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz"
