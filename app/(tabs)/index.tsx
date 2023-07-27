@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useRef, useContext, useState, useEffect } from "react";
+import { SvgUri } from 'react-native-svg';
 import {
   Platform,
   RefreshControl,
@@ -11,6 +12,8 @@ import Lottie from "lottie-react-native";
 import { ThreadContext } from "../../context/thread-context";
 import ThreadItem from "../../components/ThreadItem";
 import { Text, View } from "../../components/Themed";
+import { Image } from "expo-image";
+
 
 export default function TabOneScreen() {
   const animationRef = useRef<Lottie>(null);
@@ -58,9 +61,13 @@ export default function TabOneScreen() {
       flex: 1, // Make sure the parent View takes the full available space
       justifyContent: 'center', // Center vertically
       alignItems: 'center', // Center horizontally
-      backgroundColor: 'yellow', // Optional: Add a background color to visualize the View's boundary
+      backgroundColor: 'transparent',
     }}>
+    
 
+      <Image
+       source={require('../../assets/images/logo.svg')}
+       style={{ width: 100, height: 100, borderRadius: 15 }}/>
     </View>
        
 
