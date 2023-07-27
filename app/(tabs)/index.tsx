@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useRef, useContext, useState, useEffect } from "react";
-import { SvgUri } from 'react-native-svg';
 import {
   Platform,
   RefreshControl,
@@ -8,7 +7,6 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
-import Lottie from "lottie-react-native";
 import { ThreadContext } from "../../context/thread-context";
 import ThreadItem from "../../components/ThreadItem";
 import { Text, View } from "../../components/Themed";
@@ -16,7 +14,6 @@ import { Image } from "expo-image";
 
 
 export default function TabOneScreen() {
-  const animationRef = useRef<Lottie>(null);
   const threads = useContext(ThreadContext);
   const [isRefreshing, setisRefreshing] = useState(false) 
 
@@ -57,19 +54,13 @@ export default function TabOneScreen() {
           />
         }
       >
-    <View style={{
-      flex: 1, // Make sure the parent View takes the full available space
-      justifyContent: 'center', // Center vertically
-      alignItems: 'center', // Center horizontally
-      backgroundColor: 'transparent',
-    }}>
-    
 
-      <Image
-       source={require('../../assets/images/logo.svg')}
-       style={{ width: 100, height: 100, borderRadius: 15 }}/>
-    </View>
-       
+        {/* The logo  */}
+    
+     <Image
+     source={require('../../assets/images/logo.svg')}
+     style={{ width: 40, height: 40, borderRadius: 15, alignSelf: 'center',  marginBottom : 20, marginTop : 10 }}/>
+
 
         {/* Loop through posts  */}
         {threads.map((thread) => (
