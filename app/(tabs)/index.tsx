@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useRef, useContext, useState } from "react";
+import { useRef, useContext, useState, useEffect } from "react";
 import {
   Platform,
   RefreshControl,
@@ -15,22 +15,28 @@ import { Text, View } from "../../components/Themed";
 export default function TabOneScreen() {
   const animationRef = useRef<Lottie>(null);
   const threads = useContext(ThreadContext);
-  const [isLoading, setisLoading] = useState(false) 
+  const [isRefreshing, setisRefreshing] = useState(false) 
 
 
   // Loading functionality 
   const LoadData = () => {
     // Set loading to true 
-    setisLoading(true)
+    setisRefreshing(true)
 
     // Set Loading back to false after a few seconds 
     setTimeout(() => {
-      setisLoading(false);
-    }, 3000);
+      setisRefreshing(false);
+    }, 2000);
   }
 
-  React.useEffect(() => {
-    animationRef.current?.play();
+  useEffect(() => {
+    // Set loading to true 
+    setisRefreshing(true)
+
+    // Set Loading back to false after a few seconds 
+    setTimeout(() => {
+      setisRefreshing(false);
+    }, 3000);
   }, []);
 
   return (
@@ -42,33 +48,20 @@ export default function TabOneScreen() {
         }}
         refreshControl={
           <RefreshControl
-            refreshing={true}
+            refreshing={isRefreshing}
             // tintColor={"transparent"}
-            onRefresh={() => animationRef.current?.play()}
+            onRefresh={LoadData}
           />
         }
       >
-<View style={{
-   flex: 1, // Make sure the parent View takes the full available space
-   justifyContent: 'center', // Center vertically
-   alignItems: 'center', // Center horizontally
-   backgroundColor: 'yellow', // Optional: Add a background color to visualize the View's boundary
-}}>
+    <View style={{
+      flex: 1, // Make sure the parent View takes the full available space
+      justifyContent: 'center', // Center vertically
+      alignItems: 'center', // Center horizontally
+      backgroundColor: 'yellow', // Optional: Add a background color to visualize the View's boundary
+    }}>
 
-   {/* The lottie logo animation on refresh  */}
-   {/* <Lottie
-          ref={animationRef}
-          source={require("../../lottie-animations/threads.json")}
-          style={{
-            width: 90,
-            height: 90,
-            // marginLeft: '18%',
-          }}
-          loop={false}
-          onAnimationFinish={() => animationRef.current?.pause()}
-        /> */}
-        {/* <Text>Loading</Text> */}
-</View>
+    </View>
        
 
         {/* Loop through posts  */}
