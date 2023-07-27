@@ -7,6 +7,7 @@ import { timeAgo } from "../utils/timeAgo";
 import { Ionicons, Feather, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
+import * as Haptics from 'expo-haptics';
 
 interface TheradItemProps {
   thread: Thread;
@@ -168,6 +169,9 @@ function BottomIcons() {
   // Click Like button 
   const clickLikeButton = () => {
     setisLiked((prevIsLiked) => !prevIsLiked);
+    Haptics.notificationAsync(
+      Haptics.NotificationFeedbackType.Warning
+    )
   }
 
 
@@ -176,10 +180,10 @@ function BottomIcons() {
 
 
   return (
-    <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
 
       {/* Like button  */}
-      <TouchableOpacity onPress={clickLikeButton}>
+      <TouchableOpacity onPress={clickLikeButton} style={styles.postButtons}>
       {/* If post is liked or unliked  */}
       {isLiked ? 
         <FontAwesome name="heart" size={iconSize} color={"red"} />: 
@@ -188,13 +192,19 @@ function BottomIcons() {
       </TouchableOpacity>
 
       {/* Comment button  */}
-      <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor}  />
+      <TouchableOpacity style={styles.postButtons}>
+        <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor}  />
+      </TouchableOpacity>
 
       {/* Retweet button  */}
-      <AntDesign name="retweet" size={iconSize} color={iconColor} />
+      <TouchableOpacity style={styles.postButtons}>
+        <AntDesign name="retweet" size={iconSize} color={iconColor} />
+      </TouchableOpacity>
 
       {/* Share button  */}
-      <Feather name="send" size={iconSize} color={iconColor} />
+      <TouchableOpacity style={styles.postButtons}>
+        <Feather name="send" size={iconSize} color={iconColor} />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -212,4 +222,10 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
   },
+  postButtons: {
+    width: 40, 
+    height: 40, 
+    justifyContent:'center', 
+    alignItems: "center"
+  }
 });
