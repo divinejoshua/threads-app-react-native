@@ -34,11 +34,6 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
 
   return (
     <Pressable style={[styles.container, {borderBottomColor: borderColor}]} onPress={() => openPostDetaills(thread.id)}>
-   <Link href="/posts/43">
-          <Text>Go to info page</Text>
-    </Link>
-
-
       {/* Left side of post  */}
       <PostLeftSide {...thread} />
       

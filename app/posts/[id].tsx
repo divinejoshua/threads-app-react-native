@@ -7,7 +7,7 @@ const postDetails = () => {
   const { id }  = useSearchParams()
   return (
     <View>
-      <Stack.Screen options={{ title: `Thread #${id}` , presentation : 'modal'}} />
+      <Stack.Screen options={{ title: `Thread #${id}`}} />
       <Text>postDetails</Text>
     </View>
   )
