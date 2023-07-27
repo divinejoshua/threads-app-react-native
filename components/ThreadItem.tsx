@@ -28,7 +28,7 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
 
     // Open post details
     const openPostDetaills = (threadId: string) => {
-      router.push('/posts/123');
+      router.push('/posts/'+threadId);
     }
   
 
