@@ -8,6 +8,7 @@ import { Ionicons, Feather, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import * as Haptics from 'expo-haptics';
+import { router, useNavigation } from "expo-router";
 
 interface TheradItemProps {
   thread: Thread;
@@ -23,10 +24,16 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
     // Get theme 
     const currentTheme = useColorScheme();
     const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
+
+
+    // Open post details
+    const openPostDetaills = (threadId: string) => {
+      router.push('/posts/123');
+    }
   
 
   return (
-    <Pressable style={[styles.container, {borderBottomColor: borderColor}]}>
+    <Pressable style={[styles.container, {borderBottomColor: borderColor}]} onPress={() => openPostDetaills(thread.id)}>
 
       {/* Left side of post  */}
       <PostLeftSide {...thread} />
