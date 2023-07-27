@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View, useColorScheme } from "react-native";
+import { Button, Pressable, StyleSheet, TouchableOpacity, View, useColorScheme } from "react-native";
 import { Thread } from "../types/threads";
 import { Image } from "expo-image";
 import { Text } from "./Themed";
@@ -163,14 +163,37 @@ function BottomIcons() {
   const currentTheme = useColorScheme();
   const iconColor = currentTheme === "light" ? Colors?.light.text :Colors.dark.text;
 
+  const [isLiked, setisLiked] = useState<boolean>(false)
+
+  // Click Like button 
+  const clickLikeButton = () => {
+    setisLiked((prevIsLiked) => !prevIsLiked);
+  }
+
+
+
   
 
 
   return (
     <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
-      <FontAwesome name="heart-o" size={iconSize} color={iconColor} />
+
+      {/* Like button  */}
+      <TouchableOpacity onPress={clickLikeButton}>
+      {/* If post is liked or unliked  */}
+      {isLiked ? 
+        <FontAwesome name="heart" size={iconSize} color={"red"} />: 
+        <FontAwesome name="heart-o" size={iconSize} color={iconColor} /> 
+      }
+      </TouchableOpacity>
+
+      {/* Comment button  */}
       <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor}  />
+
+      {/* Retweet button  */}
       <AntDesign name="retweet" size={iconSize} color={iconColor} />
+
+      {/* Share button  */}
       <Feather name="send" size={iconSize} color={iconColor} />
     </View>
   );
