@@ -3,15 +3,13 @@ import { View, Text } from '../../components/Themed'
 import React from 'react'
 
 const postDetails = () => {
+   // @ts-ignore: Unreachable code error
   const { id }  = useSearchParams()
   return (
-
-   
     <View>
-      <Stack.Screen options={{ title: `Thread #${Postid}`, presentation: 'modal'  }} />
+      <Stack.Screen options={{ title: `Thread #${id}` , presentation : 'modal'}} />
       <Text>postDetails</Text>
     </View>
-
   )
 }
 
