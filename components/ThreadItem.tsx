@@ -150,7 +150,7 @@ function PostHeading({
 // Post footer component
 function PostFooter({ replies, likes }: { replies: number; likes: number }) {
   return (
-    <Text style={{ color: "gray", marginTop:10 }}>
+    <Text style={{ color: "gray", marginLeft:5 }}>
       {replies} replies · {likes} likes
     </Text>
   );
@@ -169,9 +169,7 @@ function BottomIcons() {
   // Click Like button 
   const clickLikeButton = () => {
     setisLiked((prevIsLiked) => !prevIsLiked);
-    Haptics.notificationAsync(
-      Haptics.NotificationFeedbackType.Warning
-    )
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
   }
 
 
