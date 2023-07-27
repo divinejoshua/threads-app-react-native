@@ -19,13 +19,10 @@ const blurhash =
 export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
 
 
-  // Get theme 
-  const currentTheme = useColorScheme();
-  const [iconColor, seticonColor] = useState<string>(currentTheme === "light" ? Colors.light.text :Colors.dark.text)
-  const [borderColor, setborderColor] = useState(currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor)
+    // Get theme 
+    const currentTheme = useColorScheme();
+    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
   
-
-
 
   return (
     <Pressable style={[styles.container, {borderBottomColor: borderColor}]}>

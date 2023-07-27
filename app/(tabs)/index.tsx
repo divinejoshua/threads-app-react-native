@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useRef, useContext, useState, useEffect } from "react";
 import {
   Platform,
@@ -6,16 +5,25 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  useColorScheme,
 } from "react-native";
 import { ThreadContext } from "../../context/thread-context";
 import ThreadItem from "../../components/ThreadItem";
 import { Text, View } from "../../components/Themed";
 import { Image } from "expo-image";
+import Colors from "../../constants/Colors";
 
 
 export default function TabOneScreen() {
   const threads = useContext(ThreadContext);
   const [isRefreshing, setisRefreshing] = useState(false) 
+
+    // Get theme 
+    const currentTheme = useColorScheme();
+    const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
+    
+  
+  
 
 
   // Loading functionality 
@@ -40,7 +48,7 @@ export default function TabOneScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={{backgroundColor: '#fff'}}>
+    <SafeAreaView style={{backgroundColor: backgroundColor}}>
       <ScrollView
         contentContainerStyle={{
           paddingTop: Platform.select({ android: 30 }),
