@@ -169,11 +169,11 @@ function PostFooter({ threadId }: { threadId: string }) {
     // Find the thread with the specified threadId
     const thread = threads.filter(post => post.id === threadId)
 
+    // Check for the exact thread that was updated in order to render the appropriate component only 
     if (updatedThreadId === threadId || updatedThreadId === "") {
       
       setlikes(thread[0].likesCount);
       setreplies(thread[0].repliesCount);
-      console.log("you")
     }
   }, [threads, threadId, updatedThreadId]);
 
