@@ -53,6 +53,7 @@ export default function TabOneScreen() {
         contentContainerStyle={{
           paddingTop: Platform.select({ android: 30 }),
           paddingHorizontal: 10,
+          flex:1
         }}
         refreshControl={
           <RefreshControl
