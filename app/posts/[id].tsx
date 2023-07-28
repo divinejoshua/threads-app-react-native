@@ -18,7 +18,7 @@ export default function PostItem(): JSX.Element {
   useEffect(() => {
     // Set loading to true 
     setpostThread(threads.filter(post => post.id === id)[0])
-    console.log(threads)
+    // console.log(threads)
 
   }, []);
 

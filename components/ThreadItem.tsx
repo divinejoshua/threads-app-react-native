@@ -171,7 +171,6 @@ function PostFooter({ threadId }: { threadId: string }) {
 
     // Check for the exact thread that was updated in order to render the appropriate component only 
     if (updatedThreadId === threadId || updatedThreadId === "") {
-      
       setlikes(thread[0].likesCount);
       setreplies(thread[0].repliesCount);
     }
@@ -203,9 +202,8 @@ function BottomIcons({threadId}: { threadId: string }) {
   const clickLikeButton = () => {
     setisLiked((prevIsLiked) => !prevIsLiked);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).then(
-
       // Update like count 
-      (response) => {updateLikeCount()}
+      () => {updateLikeCount()}
       )
   }
 
@@ -215,14 +213,11 @@ function BottomIcons({threadId}: { threadId: string }) {
       // Set the updated thread id_ID to threadId 
       setUpdatedThreadId(threadId)
 
-
-      let newData = []
-      newData = [...threads]  
+      // Get the new data and update it
+      let newData = [...threads]  
       let post = newData.filter(post => post.id === threadId)
       isLiked ? post[0].likesCount = post[0].likesCount - 1 : post[0].likesCount = post[0].likesCount + 1 
       setThreads(newData)
-
-
   }
 
 
