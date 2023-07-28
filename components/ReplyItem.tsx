@@ -12,7 +12,7 @@ import { Link, router, useNavigation } from "expo-router";
 import { ThreadContext } from "../context/thread-context";
 
 interface TheradItemProps {
-  thread: Thread;
+  thread: Reply;
 }
 
 const blurhash =
@@ -27,14 +27,8 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
     const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
 
 
-    // Open post details
-    const openPostDetaills = (threadId: string) => {
-      router.push('/posts/'+threadId);
-    }
-  
-
   return (
-    <Pressable style={[styles.container, {borderBottomColor: borderColor}]} onPress={() => openPostDetaills(thread.id)}>
+    <Pressable style={[styles.container, {borderBottomColor: borderColor}]}>
       {/* Left side of post  */}
       <PostLeftSide {...thread} />
       
@@ -48,24 +42,14 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
         />
 
         {/* Post body  */}
-        <Text style={{ marginBottom:10, fontSize: 16}}>{thread.content}</Text>
+        <Text style={{ marginBottom:0, fontSize: 16}}>{thread.content}</Text>
 
-        {/* Post image  */}
-        {thread.image && (
-          <Image
-            source={thread.image}
-            style={{ width: "100%", minHeight: 300, borderRadius: 10, marginBottom:10}}
-            placeholder={blurhash}
-            contentFit="cover"
-            transition={500}
-          />
-        )}
 
         {/* icons  */}
-        <BottomIcons threadId={thread.id}/>
+        <BottomIcons/>
 
         {/* Post footers  */}
-        <PostFooter threadId={thread.id} />
+        <PostFooter likesNumber={thread.likes} />
       </View>
     </Pressable>
   );
@@ -73,10 +57,7 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
 
 
 // Post Left side component 
-function PostLeftSide(thread: Thread) {
-  const currentTheme = useColorScheme();
-  const borderColor = currentTheme === "light" ? "#00000020" : "#ffffff20";
-
+function PostLeftSide(thread: Reply) {
   return (
     <View style={{ justifyContent: "space-between" }}>
       <Image
@@ -86,34 +67,7 @@ function PostLeftSide(thread: Thread) {
         contentFit="cover"
         transition={500}
       />
-      <View
-        style={{
-          borderWidth: 1,
-          alignSelf: "center",
-          borderColor: borderColor,
-          flexGrow: 1,
-        }}
-      />
-      <View
-        style={{
-          width: 20,
-          alignItems: "center",
-          alignSelf: "center",
-          gap: 3,
-        }}
-      >
-        {[1, 2, 3].map((index) => (
-          <Image
-            key={index}
-            //@ts-ignore
-            source={thread.replies[index - 1]?.author.photo}
-            style={{ width: index * 7, height: index * 7, borderRadius: 15 }}
-            placeholder={blurhash}
-            contentFit="cover"
-            transition={500}
-          />
-        ))}
-      </View>
+    
     </View>
   );
 }
@@ -154,41 +108,18 @@ function PostHeading({
 
 
 // Post footer component
-function PostFooter({ threadId }: { threadId: string }) {
-
-
-     
-  // Get the thread
-  const { threads, setThreads, updatedThreadId } = useContext(ThreadContext);
-  const [likes, setlikes] = useState<number>(0)
-  const [replies, setreplies] = useState<number>(0)
-
-  useEffect(() => {
-
-    // Find the thread with the specified threadId
-    const thread = threads.filter(post => post.id === threadId)
-
-    // Check for the exact thread that was updated in order to render the appropriate component only 
-    if (updatedThreadId === threadId || updatedThreadId === "") {
-      setlikes(thread[0].likesCount);
-      setreplies(thread[0].repliesCount);
-    }
-  }, [threads, threadId, updatedThreadId]);
-
+function PostFooter({likesNumber}: { likesNumber: number }) {
+    
   return (
     <Text style={{ color: "gray", marginLeft:5 }}>
-      {replies} replies · {likes} likes
+     {likesNumber} likes
     </Text>
   );
 }
 
 
 // Action icons components 
-function BottomIcons({threadId}: { threadId: string }) {
-
-  // Get threads from context API 
-  const {threads, setThreads, updatedThreadId, setUpdatedThreadId} = useContext(ThreadContext);
-
+function BottomIcons() {
 
   const iconSize = 21;
 
@@ -200,27 +131,8 @@ function BottomIcons({threadId}: { threadId: string }) {
   // Click Like button 
   const clickLikeButton = () => {
     setisLiked((prevIsLiked) => !prevIsLiked);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).then(
-      // Update like count 
-      () => {updateLikeCount()}
-      )
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
   }
-
-  // Updating the like count function 
-  const updateLikeCount = async ()=>{
-
-      // Set the updated thread id_ID to threadId 
-      setUpdatedThreadId(threadId)
-
-      // Get the new data and update it
-      let newData = [...threads]  
-      let post = newData.filter(post => post.id === threadId)
-      isLiked ? post[0].likesCount = post[0].likesCount - 1 : post[0].likesCount = post[0].likesCount + 1 
-      setThreads(newData)
-  }
-
-
-
   
 
 

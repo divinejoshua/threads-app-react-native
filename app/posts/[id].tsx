@@ -10,6 +10,7 @@ import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/
 import { timeAgo } from '../../utils/timeAgo';
 import Colors from '../../constants/Colors';
 import * as Haptics from 'expo-haptics';
+import ReplyItem from '../../components/ReplyItem';
 
 
 
@@ -56,8 +57,6 @@ export default function PostItem(): JSX.Element {
   useEffect(() => {
     // Set loading to true 
     setthreadPost(threads.filter(post => post.id === id)[0])
-    console.log(threads.filter(post => post.id === id)[0])
-
   }, []);
 
 
@@ -115,10 +114,14 @@ export default function PostItem(): JSX.Element {
           </View>
         : ""
         }
+
+
        
 
       
-       {/* Post heading  */}
+      {threadPost.replies && threadPost.replies.map((replies) => (
+        <ReplyItem key={replies.id} thread={replies} />
+        ))}
      
 
       </ScrollView>
@@ -273,6 +276,35 @@ function BottomIcons({threadId}: { threadId: string }) {
   );
 }
 
+
+
+// // Post footer component
+// function ThreadReply({ threadId }: { threadId: string }) {
+
+
+     
+//   // Get the thread
+//   const { threads, setThreads, updatedThreadId } = useContext(ThreadContext);
+//   const [likes, setlikes] = useState<number>(0)
+//   const [replies, setreplies] = useState<number>(0)
+
+//   useEffect(() => {
+
+//     // Find the thread with the specified threadId
+//     const thread = threads.filter(post => post.id === threadId)
+
+//     // Check for the exact thread that was updated in order to render the appropriate component only 
+  
+//       setlikes(thread[0].likesCount);
+//       setreplies(thread[0].repliesCount);
+//   }, [threads, threadId, updatedThreadId]);
+
+//   return (
+//     <Text style={{ color: "gray", marginLeft:5 }}>
+//       {replies} replies · {likes} likes
+//     </Text>
+//   );
+// }
 
 
 const styles = StyleSheet.create({
