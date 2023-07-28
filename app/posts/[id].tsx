@@ -1,16 +1,17 @@
-import { Stack, useSearchParams } from 'expo-router'
+import { Link, Stack, router, useSearchParams } from 'expo-router'
 import { View, Text } from '../../components/Themed'
 import React, { useContext, useEffect, useState } from 'react'
 import { Thread } from '../../types/threads';
 import { ThreadContext } from '../../context/thread-context';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Platform, SafeAreaView, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
+import { Platform, Pressable, SafeAreaView, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 import { Image } from 'expo-image';
 import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { timeAgo } from '../../utils/timeAgo';
 import Colors from '../../constants/Colors';
 import * as Haptics from 'expo-haptics';
 import ReplyItem from '../../components/ReplyItem';
+
 
 
 
@@ -27,7 +28,6 @@ export default function PostItem(): JSX.Element {
   const {threads } = useContext(ThreadContext);
 
   const [threadPost, setthreadPost] = useState<Thread>(Object)
-  const [isRefreshing, setisRefreshing] = useState(false) 
 
   // Get theme 
   const currentTheme = useColorScheme();
@@ -35,24 +35,7 @@ export default function PostItem(): JSX.Element {
   const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
   const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
 
-  
-  
-  
 
-  // Loading functionality 
-  const LoadData = () => {
-    // Set loading to true 
-    setisRefreshing(true)
-
-    // Set Loading back to false after a few seconds 
-    setTimeout(() => {
-      setisRefreshing(false);
-    }, 2000);
-  }
-
-
-  // Set the post thread
-  const [postThread, setpostThread] = useState({})
 
   useEffect(() => {
     // Set loading to true 
@@ -198,9 +181,11 @@ function PostFooter({ threadId }: { threadId: string }) {
   }, [threads, threadId, updatedThreadId]);
 
   return (
-    <Text style={{ color: "gray", marginLeft:5 }}>
-      {replies} replies · {likes} likes
-    </Text>
+    <Pressable  onPress={() => router.push('/likes')}>
+      <Text style={{ color: "gray", marginLeft:5 }}>
+        {replies} replies · {likes} likes 
+      </Text>
+    </Pressable>
   );
 }
 
