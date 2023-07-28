@@ -6,9 +6,10 @@ import Colors from "../constants/Colors";
 import { timeAgo } from "../utils/timeAgo";
 import { Ionicons, Feather, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import * as Haptics from 'expo-haptics';
 import { Link, router, useNavigation } from "expo-router";
+import { ThreadContext } from "../context/thread-context";
 
 interface TheradItemProps {
   thread: Thread;
@@ -65,7 +66,7 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
         <BottomIcons />
 
         {/* Post footers  */}
-        <PostFooter replies={thread.repliesCount} likes={thread.likesCount} />
+        <PostFooter threadId={thread.id} />
       </View>
     </Pressable>
   );
@@ -154,7 +155,15 @@ function PostHeading({
 
 
 // Post footer component
-function PostFooter({ replies, likes }: { replies: number; likes: number }) {
+function PostFooter({ threadId }: { threadId: string }) {
+
+  // Get the thread
+  const threads = useContext(ThreadContext);
+  const [likes, setlikes] = useState<number>(0)
+  const [replies, setreplies] = useState<number>(0)
+  console.log(threads.filter(post => post.id === threadId)[0])
+
+
   return (
     <Text style={{ color: "gray", marginLeft:5 }}>
       {replies} replies · {likes} likes
