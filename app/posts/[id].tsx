@@ -145,7 +145,7 @@ function PostHeading({
             transition={500}
       />
 
-        <Text style={{ fontWeight: "500" }}>{name}</Text>
+        <Text style={{ fontWeight: "600" }}>{name}</Text>
         {verified && (
           <MaterialIcons name="verified" size={14} color="#60a5fa" />
         )}
