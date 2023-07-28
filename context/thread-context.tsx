@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Thread } from "../types/threads";
-import { generateThreads } from "../utils/generate-dommy-data";
+
+// import { generateThreads } from "../utils/generate-dommy-data";
 
 
 // Define the type for the context value
@@ -31,7 +32,33 @@ export const ThreadProvdier = ({
   const [updatedThreadId, setUpdatedThreadId] = React.useState<string>("")
 
   React.useEffect(() => {
-    setThreads(generateThreads());
+
+    // Pick at random 
+    let dataList = ["one", "two", "three", "four", "five"]
+    let file = Math.floor(Math.random() * dataList.length);
+    let threadData : any =null
+    
+
+    if (dataList[file]=="one"){
+      threadData = require("../assets/data/one.json")
+    }
+    if (dataList[file]=="two"){
+      threadData = require("../assets/data/two.json")
+    }
+    if (dataList[file]=="three"){
+      threadData = require("../assets/data/three.json")
+    }
+    if (dataList[file]=="four"){
+      threadData = require("../assets/data/four.json")
+    }
+    if (dataList[file]=="five"){
+      threadData = require("../assets/data/five.json")
+    }
+
+
+    console.log(dataList[file]);
+
+    setThreads(threadData);
   }, []);
 
   return (
