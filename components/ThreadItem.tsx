@@ -6,7 +6,7 @@ import Colors from "../constants/Colors";
 import { timeAgo } from "../utils/timeAgo";
 import { Ionicons, Feather, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import * as Haptics from 'expo-haptics';
 import { Link, router, useNavigation } from "expo-router";
 import { ThreadContext } from "../context/thread-context";
@@ -63,7 +63,7 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
 
         {/* icons  */}
         {/* @ts-ignore */}
-        <BottomIcons />
+        <BottomIcons threadId={thread.id}/>
 
         {/* Post footers  */}
         <PostFooter threadId={thread.id} />
@@ -157,12 +157,25 @@ function PostHeading({
 // Post footer component
 function PostFooter({ threadId }: { threadId: string }) {
 
+
+     
   // Get the thread
-  const threads = useContext(ThreadContext);
+  const { threads, setThreads } = useContext(ThreadContext);
   const [likes, setlikes] = useState<number>(0)
   const [replies, setreplies] = useState<number>(0)
-  console.log(threads.filter(post => post.id === threadId)[0])
 
+  useEffect(() => {
+
+    // Find the thread with the specified threadId
+    const thread = threads.find((thread) => thread.id === threadId);
+
+
+    if (thread) {
+      setlikes(thread.likesCount);
+      setreplies(thread.repliesCount);
+    }
+    console.log("you")
+  });
 
   return (
     <Text style={{ color: "gray", marginLeft:5 }}>
@@ -173,7 +186,12 @@ function PostFooter({ threadId }: { threadId: string }) {
 
 
 // Action icons components 
-function BottomIcons() {
+function BottomIcons({threadId}: { threadId: string }) {
+
+  // Get threads from context API 
+  const {threads, setThreads} = useContext(ThreadContext);
+
+
   const iconSize = 21;
 
   const currentTheme = useColorScheme();
@@ -184,7 +202,20 @@ function BottomIcons() {
   // Click Like button 
   const clickLikeButton = () => {
     setisLiked((prevIsLiked) => !prevIsLiked);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).then(
+
+      // Update like count 
+      (response) => {updateLikeCount()}
+      )
+  }
+
+  // Updating the like count function 
+  const updateLikeCount = async ()=>{
+      let newData = []
+      newData = [...threads]  
+      let post = newData.filter(post => post.id === threadId)
+      isLiked ? post[0].likesCount = post[0].likesCount - 1 : post[0].likesCount = post[0].likesCount + 1 
+      setThreads(newData)
   }
 
 

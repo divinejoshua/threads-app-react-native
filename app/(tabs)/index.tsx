@@ -15,7 +15,7 @@ import Colors from "../../constants/Colors";
 
 
 export default function TabOneScreen() {
-  const threads = useContext(ThreadContext);
+  const {threads} = useContext(ThreadContext);
   const [isRefreshing, setisRefreshing] = useState(false) 
 
     // Get theme 

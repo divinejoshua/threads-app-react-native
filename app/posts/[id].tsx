@@ -10,7 +10,7 @@ export default function PostItem(): JSX.Element {
    // @ts-ignore: Unreachable code error
   const { id }  = useSearchParams()
 
-  const threads = useContext(ThreadContext);
+  const {threads} = useContext(ThreadContext);
 
   // Set the post thread
   const [postThread, setpostThread] = useState({})
@@ -18,7 +18,8 @@ export default function PostItem(): JSX.Element {
   useEffect(() => {
     // Set loading to true 
     setpostThread(threads.filter(post => post.id === id)[0])
-    console.log(threads.filter(post => post.id === id)[0].author.name)
+    console.log(threads)
+
   }, []);
 
 

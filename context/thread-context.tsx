@@ -2,7 +2,22 @@ import * as React from "react";
 import { Thread } from "../types/threads";
 import { generateThreads } from "../utils/generate-dommy-data";
 
-export const ThreadContext = React.createContext<Thread[]>([]);
+
+// Define the type for the context value
+interface ThreadContextValue {
+  threads: Thread[];
+  setThreads: React.Dispatch<React.SetStateAction<Thread[]>>;
+}
+
+// Use the defined type for createContext
+export const ThreadContext = React.createContext<ThreadContextValue>({
+  threads: [],
+  setThreads: () => {},
+});
+
+
+
+// export const ThreadContext = React.createContext();
 
 export const ThreadProvdier = ({
   children,
@@ -14,6 +29,6 @@ export const ThreadProvdier = ({
   }, []);
 
   return (
-    <ThreadContext.Provider value={threads}>{children}</ThreadContext.Provider>
+    <ThreadContext.Provider value={{threads, setThreads}}>{children}</ThreadContext.Provider>
   );
 };
