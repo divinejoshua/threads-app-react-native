@@ -40,6 +40,8 @@ export default function PostItem(): JSX.Element {
   useEffect(() => {
     // Set loading to true 
     setthreadPost(threads.filter(post => post.id === id)[0])
+
+    console.log(JSON. stringify(threads))
   }, []);
 
 

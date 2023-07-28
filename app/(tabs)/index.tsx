@@ -45,6 +45,8 @@ export default function TabOneScreen() {
     setTimeout(() => {
       setisRefreshing(false);
     }, 3000);
+
+    
   }, []);
 
   return (
