@@ -38,7 +38,7 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
       {/* Left side of post  */}
       <PostLeftSide {...thread} />
       
-      <View style={{ flexShrink: 1, gap: 6,}}>
+      <View style={{ flexShrink: 1, gap: 6, paddingLeft:3}}>
 
         {/* Post heading  */}
         <PostHeading
@@ -62,7 +62,6 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
         )}
 
         {/* icons  */}
-        {/* @ts-ignore */}
         <BottomIcons threadId={thread.id}/>
 
         {/* Post footers  */}

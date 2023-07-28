@@ -3,12 +3,13 @@ import { View, Text } from '../../components/Themed'
 import React, { useContext, useEffect, useState } from 'react'
 import { Thread } from '../../types/threads';
 import { ThreadContext } from '../../context/thread-context';
-import { RefreshControl, ScrollView } from 'react-native-gesture-handler';
-import { Platform, SafeAreaView, StyleSheet, useColorScheme } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Platform, SafeAreaView, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
 import { Image } from 'expo-image';
-import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { timeAgo } from '../../utils/timeAgo';
 import Colors from '../../constants/Colors';
+import * as Haptics from 'expo-haptics';
 
 
 
@@ -31,6 +32,8 @@ export default function PostItem(): JSX.Element {
   const currentTheme = useColorScheme();
   const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
   const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
+  const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
+
   
   
   
@@ -78,22 +81,39 @@ export default function PostItem(): JSX.Element {
           paddingHorizontal: 15,
           marginTop: 10
         }}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            // tintColor={"transparent"}
-            onRefresh={LoadData}
-          />
-        }
+       
       >
-        {threadPost.id && 
-          <PostHeading
-            name={threadPost.author.name}
-            verified={threadPost.author.verified}
-            createdAt={threadPost.createdAt}
-            authorProfile = { threadPost.author.photo }
-          /> 
-        
+        {threadPost.id ? 
+          <View style={[styles.post,  {borderBottomColor: borderColor}]}>
+            <PostHeading
+              name={threadPost.author.name}
+              verified={threadPost.author.verified}
+              createdAt={threadPost.createdAt}
+              authorProfile = { threadPost.author.photo }
+            /> 
+
+            <Text style={{ marginTop:15, marginBottom:15, fontSize: 16}}>{threadPost.content}</Text>
+
+            {/* Post image  */}
+            {threadPost.image && (
+              <Image
+                source={threadPost.image}
+                style={{ width: "100%", minHeight: 300, borderRadius: 10, marginBottom:10}}
+                placeholder={blurhash}
+                contentFit="cover"
+                transition={500}
+              />
+            )}
+
+
+            {/* icons  */}
+            <BottomIcons threadId={threadPost.id}/>
+
+            {/* Post footers  */}
+            <PostFooter threadId={threadPost.id} />
+
+          </View>
+        : ""
         }
        
 
@@ -153,6 +173,108 @@ function PostHeading({
 }
 
 
+// Post footer component
+function PostFooter({ threadId }: { threadId: string }) {
+
+
+     
+  // Get the thread
+  const { threads, setThreads, updatedThreadId } = useContext(ThreadContext);
+  const [likes, setlikes] = useState<number>(0)
+  const [replies, setreplies] = useState<number>(0)
+
+  useEffect(() => {
+
+    // Find the thread with the specified threadId
+    const thread = threads.filter(post => post.id === threadId)
+
+    // Check for the exact thread that was updated in order to render the appropriate component only 
+  
+      setlikes(thread[0].likesCount);
+      setreplies(thread[0].repliesCount);
+  }, [threads, threadId, updatedThreadId]);
+
+  return (
+    <Text style={{ color: "gray", marginLeft:5 }}>
+      {replies} replies · {likes} likes
+    </Text>
+  );
+}
+
+
+// Action icons components 
+function BottomIcons({threadId}: { threadId: string }) {
+
+  // Get threads from context API 
+  const {threads, setThreads, updatedThreadId, setUpdatedThreadId} = useContext(ThreadContext);
+
+
+  const iconSize = 21;
+
+  const currentTheme = useColorScheme();
+  const iconColor = currentTheme === "light" ? Colors?.light.text :Colors.dark.text;
+
+  const [isLiked, setisLiked] = useState<boolean>(false)
+
+  // Click Like button 
+  const clickLikeButton = () => {
+    setisLiked((prevIsLiked) => !prevIsLiked);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).then(
+      // Update like count 
+      () => {updateLikeCount()}
+      )
+  }
+
+  // Updating the like count function 
+  const updateLikeCount = async ()=>{
+
+      // Set the updated thread id_ID to threadId 
+      setUpdatedThreadId(threadId)
+
+      // Get the new data and update it
+      let newData = [...threads]  
+      let post = newData.filter(post => post.id === threadId)
+      isLiked ? post[0].likesCount = post[0].likesCount - 1 : post[0].likesCount = post[0].likesCount + 1 
+      setThreads(newData)
+  }
+
+
+
+  
+
+
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center", marginBottom:2, }}>
+
+      {/* Like button  */}
+      <TouchableOpacity onPress={clickLikeButton} style={styles.postButtons}>
+      {/* If post is liked or unliked  */}
+      {isLiked ? 
+        <FontAwesome name="heart" size={iconSize} color={"red"} />: 
+        <FontAwesome name="heart-o" size={iconSize} color={iconColor} /> 
+      }
+      </TouchableOpacity>
+
+      {/* Comment button  */}
+      <TouchableOpacity style={styles.postButtons}>
+        <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor}  />
+      </TouchableOpacity>
+
+      {/* Retweet button  */}
+      <TouchableOpacity style={styles.postButtons}>
+        <AntDesign name="retweet" size={iconSize} color={iconColor} />
+      </TouchableOpacity>
+
+      {/* Share button  */}
+      <TouchableOpacity style={styles.postButtons}>
+        <Feather name="send" size={iconSize} color={iconColor} />
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
@@ -161,9 +283,15 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     borderBottomWidth: .5,
   },
+
+  post:{
+    paddingBottom: 20,
+    borderBottomWidth: .5,
+  },
+
   image: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
     borderRadius: 20,
   },
   postButtons: {
