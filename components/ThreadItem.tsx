@@ -160,22 +160,22 @@ function PostFooter({ threadId }: { threadId: string }) {
 
      
   // Get the thread
-  const { threads, setThreads } = useContext(ThreadContext);
+  const { threads, setThreads, updatedThreadId } = useContext(ThreadContext);
   const [likes, setlikes] = useState<number>(0)
   const [replies, setreplies] = useState<number>(0)
 
   useEffect(() => {
 
     // Find the thread with the specified threadId
-    const thread = threads.find((thread) => thread.id === threadId);
+    const thread = threads.filter(post => post.id === threadId)
 
-
-    if (thread) {
-      setlikes(thread.likesCount);
-      setreplies(thread.repliesCount);
+    if (updatedThreadId === threadId || updatedThreadId === "") {
+      
+      setlikes(thread[0].likesCount);
+      setreplies(thread[0].repliesCount);
+      console.log("you")
     }
-    console.log("you")
-  });
+  }, [threads, threadId, updatedThreadId]);
 
   return (
     <Text style={{ color: "gray", marginLeft:5 }}>
@@ -189,7 +189,7 @@ function PostFooter({ threadId }: { threadId: string }) {
 function BottomIcons({threadId}: { threadId: string }) {
 
   // Get threads from context API 
-  const {threads, setThreads} = useContext(ThreadContext);
+  const {threads, setThreads, updatedThreadId, setUpdatedThreadId} = useContext(ThreadContext);
 
 
   const iconSize = 21;
@@ -211,11 +211,18 @@ function BottomIcons({threadId}: { threadId: string }) {
 
   // Updating the like count function 
   const updateLikeCount = async ()=>{
+
+      // Set the updated thread id_ID to threadId 
+      setUpdatedThreadId(threadId)
+
+
       let newData = []
       newData = [...threads]  
       let post = newData.filter(post => post.id === threadId)
       isLiked ? post[0].likesCount = post[0].likesCount - 1 : post[0].likesCount = post[0].likesCount + 1 
       setThreads(newData)
+
+
   }
 
 
