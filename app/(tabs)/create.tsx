@@ -20,7 +20,7 @@ return (
 
       <Stack.Screen options={{ presentation: 'modal'}} />
      {/* Header text  */}
-   <Text style={styles.title}>New post</Text>
+   {/* <Text style={styles.title}>New post</Text> */}
 
    {/* Scroll view  */}
    <ScrollView
