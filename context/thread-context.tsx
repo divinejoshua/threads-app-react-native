@@ -39,6 +39,7 @@ export const ThreadProvdier = ({
     let threadData : any =null
     
 
+    // Select a json file at random 
     if (dataList[file]=="one"){
       threadData = require("../assets/data/one.json")
     }
@@ -54,9 +55,6 @@ export const ThreadProvdier = ({
     if (dataList[file]=="five"){
       threadData = require("../assets/data/five.json")
     }
-
-
-    console.log(dataList[file]);
 
     setThreads(threadData);
   }, []);
