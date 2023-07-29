@@ -42,7 +42,6 @@ export default function TabLayout() {
         name="createpost"
         options={{
           title: "",
-          href: "/createpost",
           tabBarIcon: ({ color }) => <TabBarIcon name="edit" color={color} />,
         }}
       />

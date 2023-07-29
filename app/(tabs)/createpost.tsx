@@ -1,9 +1,9 @@
 import {  useColorScheme, Platform, StyleSheet } from 'react-native'
 import React from 'react'
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
-import { View, Text } from '../components/Themed';
+import { View, Text } from '../../components/Themed';
 import { Stack } from 'expo-router';
 
 export default function CreatePostScreen () {
