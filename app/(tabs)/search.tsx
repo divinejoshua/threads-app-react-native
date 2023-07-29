@@ -1,10 +1,19 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
-import { Link } from 'expo-router';
+import Colors from '../../constants/Colors';
 
-export default function TabTwoScreen() {
+export default function SearchScreen() {
+
+    // Get theme 
+    const currentTheme = useColorScheme();
+    const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
+    const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
+    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
+  
+
+    
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
