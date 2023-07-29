@@ -42,6 +42,7 @@ export default function TabLayout() {
         name="createpost"
         options={{
           title: "",
+          href: "/createpost",
           tabBarIcon: ({ color }) => <TabBarIcon name="edit" color={color} />,
         }}
       />
@@ -51,6 +52,7 @@ export default function TabLayout() {
           title: "",
           tabBarIcon: ({ color }) => <TabBarIcon name="heart-o" color={color} />,
         }}
+        
       />
        <Tabs.Screen
         name="profile"
