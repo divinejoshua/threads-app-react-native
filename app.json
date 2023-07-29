@@ -17,14 +17,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.betomoedano.threads-clone"
+      "bundleIdentifier": "com.divinejoshua.threads-clone"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.betomoedano.threadsclone"
+      "package": "com.divinejoshua.threadsclone"
     },
     "web": {
       "bundler": "metro",
