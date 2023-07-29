@@ -68,8 +68,8 @@ export default function TabOneScreen() {
         {/* The logo  */}
     
       <Image
-      source={require('../../assets/images/logo.svg')}
-      style={{ width: 40, height: 40, borderRadius: 15, alignSelf: 'center',  marginBottom : 20, marginTop : 10 }}/>
+        source={require('../../assets/images/logo.svg')}
+        style={{ width: 40, height: 40, borderRadius: 15, alignSelf: 'center',  marginBottom : 20, marginTop : 10 }}/>
 
 
         {/* Loop through posts  */}
