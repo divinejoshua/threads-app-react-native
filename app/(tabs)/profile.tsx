@@ -16,7 +16,7 @@ export default function  ProfileScreen () {
 
   
   return (
-    <SafeAreaView  style={[{backgroundColor: backgroundColor, flex: 1,}]} >
+    <SafeAreaView  style={[styles.container, {backgroundColor: backgroundColor, flex: 1,}]} >
 
       <Text style={styles.title}>Profile</Text>
       <ScrollView
@@ -36,9 +36,12 @@ export default function  ProfileScreen () {
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop:20,
+        paddingLeft:20,
+        paddingRight:20,
     },
     title: {
-      fontSize: 20,
+      fontSize: 30,
       fontWeight: 'bold',
     },
     separator: {
