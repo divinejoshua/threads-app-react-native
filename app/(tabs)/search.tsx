@@ -1,42 +1,54 @@
-import { StyleSheet, useColorScheme } from 'react-native';
-
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+import {  useColorScheme, Platform, StyleSheet } from 'react-native'
+import React from 'react'
 import Colors from '../../constants/Colors';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native-gesture-handler';
+import { View, Text } from '../../components/Themed';
+import EditScreenInfo from '../../components/EditScreenInfo';
 
-export default function SearchScreen() {
+export default function SearchScreen () {
+ // Get theme 
+ const currentTheme = useColorScheme();
+ const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
+ const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
 
-    // Get theme 
-    const currentTheme = useColorScheme();
-    const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
-    const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
-    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
-  
 
-    
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
 
-    </View>
-  );
+return (
+ // Main 
+ <SafeAreaView  style={[styles.container, {backgroundColor: backgroundColor, flex: 1,}]} >
+     {/* Header text  */}
+   <Text style={styles.title}>Search</Text>
+
+   {/* Scroll view  */}
+   <ScrollView
+     contentContainerStyle={{
+       paddingTop: Platform.select({ android: 30 }),
+       paddingHorizontal: 15,
+       marginTop: 10
+     }}
+   >
+ </ScrollView>
+ </SafeAreaView>
+)
 }
 
+
+
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+ container: {
+     paddingTop:20,
+     paddingLeft:20,
+     paddingRight:20,
+ },
+ title: {
+   fontSize: 30,
+   fontWeight: 'bold',
+ },
+ separator: {
+   marginVertical: 30,
+   height: 1,
+   width: '80%',
+ },
 });

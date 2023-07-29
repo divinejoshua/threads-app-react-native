@@ -16,9 +16,12 @@ export default function  ProfileScreen () {
 
   
   return (
+    // Main 
     <SafeAreaView  style={[styles.container, {backgroundColor: backgroundColor, flex: 1,}]} >
-
+        {/* Header text  */}
       <Text style={styles.title}>Profile</Text>
+
+      {/* Scroll view  */}
       <ScrollView
         contentContainerStyle={{
           paddingTop: Platform.select({ android: 30 }),
