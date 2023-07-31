@@ -26,8 +26,13 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
+
+
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
+
+    // Get the posts 
     if (!loaded) {
       SplashScreen.preventAutoHideAsync();
     } else {

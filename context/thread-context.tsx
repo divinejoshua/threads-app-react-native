@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Dispatch, createContext, PropsWithChildren, SetStateAction, useEffect, useState } from "react";
 import { Thread } from "../types/threads";
 
 // import { generateThreads } from "../utils/generate-dommy-data";
@@ -7,13 +7,13 @@ import { Thread } from "../types/threads";
 // Define the type for the context value
 interface ThreadContextValue {
   threads: Thread[];
-  setThreads: React.Dispatch<React.SetStateAction<Thread[]>>;
+  setThreads: Dispatch<SetStateAction<Thread[]>>;
   updatedThreadId : string
-  setUpdatedThreadId : React.Dispatch<React.SetStateAction<string>>
+  setUpdatedThreadId : Dispatch<SetStateAction<string>>
 }
 
 // Use the defined type for createContext
-export const ThreadContext = React.createContext<ThreadContextValue>({
+export const ThreadContext = createContext<ThreadContextValue>({
   threads: [],
   updatedThreadId : "",
   setThreads: () => {},
@@ -27,36 +27,37 @@ export const ThreadContext = React.createContext<ThreadContextValue>({
 
 export const ThreadProvdier = ({
   children,
-}: React.PropsWithChildren): JSX.Element => {
-  const [threads, setThreads] = React.useState<Thread[]>([]);
-  const [updatedThreadId, setUpdatedThreadId] = React.useState<string>("")
+}: PropsWithChildren ): JSX.Element => {
+  const [threads, setThreads] = useState<Thread[]>([]);
+  const [updatedThreadId, setUpdatedThreadId] = useState<string>("")
 
-  React.useEffect(() => {
+    useEffect(() => {
 
-    // Pick at random 
-    let dataList = ["one", "two", "three", "four", "five"]
-    let file = Math.floor(Math.random() * dataList.length);
-    let threadData : any =null
-    
-
-    // Select a json file at random 
-    if (dataList[file]=="one"){
-      threadData = require("../assets/data/one.json")
-    }
-    if (dataList[file]=="two"){
-      threadData = require("../assets/data/two.json")
-    }
-    if (dataList[file]=="three"){
-      threadData = require("../assets/data/three.json")
-    }
-    if (dataList[file]=="four"){
-      threadData = require("../assets/data/four.json")
-    }
-    if (dataList[file]=="five"){
-      threadData = require("../assets/data/five.json")
-    }
-
-    setThreads(threadData);
+     // Pick at random 
+     let dataList = ["one", "two", "three", "four", "five"]
+     let file = Math.floor(Math.random() * dataList.length);
+     let threadData : any =null
+ 
+ 
+     // Select a json file at random 
+     if (dataList[file]=="one"){
+       threadData = require("../assets/data/one.json")
+     }
+     if (dataList[file]=="two"){
+       threadData = require("../assets/data/two.json")
+     }
+     if (dataList[file]=="three"){
+       threadData = require("../assets/data/three.json")
+     }
+     if (dataList[file]=="four"){
+       threadData = require("../assets/data/four.json")
+     }
+     if (dataList[file]=="five"){
+       threadData = require("../assets/data/five.json")
+     }
+ 
+     setThreads(threadData);
+  
   }, []);
 
   return (

@@ -12,15 +12,19 @@ import ThreadItem from "../../components/ThreadItem";
 import { Text, View } from "../../components/Themed";
 import { Image } from "expo-image";
 import Colors from "../../constants/Colors";
+import useChooseFile from "../../utils/choose-file";
 
 
 export default function TabOneScreen() {
-  const {threads} = useContext(ThreadContext);
-  const [isRefreshing, setisRefreshing] = useState(false) 
+    const {threads, setThreads} = useContext(ThreadContext);
+    const [isRefreshing, setisRefreshing] = useState(false) 
 
     // Get theme 
     const currentTheme = useColorScheme();
     const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
+
+    const { getPosts } = useChooseFile()
+    
     
   
   
@@ -30,6 +34,9 @@ export default function TabOneScreen() {
   const LoadData = () => {
     // Set loading to true 
     setisRefreshing(true)
+
+    // on refresh get new posts from choose file hook
+    getPosts()
 
     // Set Loading back to false after a few seconds 
     setTimeout(() => {
