@@ -65,7 +65,7 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
         <BottomIcons threadId={thread.id}/>
 
         {/* Post footers  */}
-        <PostFooter threadId={thread.id} />
+        <PostFooter threadId={thread.id} likesCount={thread.likesCount} repliesCount={thread.repliesCount} />
       </View>
     </Pressable>
   );
@@ -154,22 +154,25 @@ function PostHeading({
 
 
 // Post footer component
-function PostFooter({ threadId }: { threadId: string }) {
+function PostFooter({ threadId, likesCount, repliesCount }: { threadId: string, likesCount: number, repliesCount: number}) {
 
 
      
   // Get the thread
   const { threads, setThreads, updatedThreadId } = useContext(ThreadContext);
-  const [likes, setlikes] = useState<number>(0)
-  const [replies, setreplies] = useState<number>(0)
+  const [likes, setlikes] = useState<number>(likesCount)
+  const [replies, setreplies] = useState<number>(repliesCount)
 
   useEffect(() => {
 
-    // Find the thread with the specified threadId
-    const thread = threads.filter(post => post.id === threadId)
 
     // Check for the exact thread that was updated in order to render the appropriate component only 
     if (updatedThreadId === threadId || updatedThreadId === "") {
+
+    // Find the thread with the specified threadId
+      const thread = threads.filter(post => post.id === threadId)
+
+      // set thre values 
       setlikes(thread[0].likesCount);
       setreplies(thread[0].repliesCount);
     }
