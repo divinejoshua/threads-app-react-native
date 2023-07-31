@@ -1,6 +1,6 @@
-import { View, Text } from '../components/Themed'
+import { View, Text } from '../../components/Themed'
 import React from 'react'
-import EditScreenInfo from '../components/EditScreenInfo';
+import EditScreenInfo from '../../components/EditScreenInfo';
 import { Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
 

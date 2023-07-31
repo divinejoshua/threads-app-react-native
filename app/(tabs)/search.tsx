@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { View, Text } from '../../components/Themed';
 import EditScreenInfo from '../../components/EditScreenInfo';
+import { Link } from 'expo-router';
 
 export default function SearchScreen () {
  // Get theme 
@@ -28,6 +29,18 @@ return (
        marginTop: 10
      }}
    >
+
+      <Link href="/accounts" >
+          <Text>Go to home screen!</Text>
+        </Link>
+
+        <Link href="/accounts/login" >
+          <Text>Go to home screen!</Text>
+        </Link>
+
+        <Link href="/posts/rest" >
+          <Text>Go to home screen!</Text>
+        </Link>
  </ScrollView>
  </SafeAreaView>
 )
