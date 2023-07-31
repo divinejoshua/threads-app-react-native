@@ -53,10 +53,9 @@ function RootLayoutNav() {
         <ThreadProvdier>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            {/* <Stack.Screen name="posts/likes" options={{ presentation: "modal" }} /> */}
+            <Stack.Screen name="posts/likes" options={{ presentation: "modal" }} />
             {/* <Stack.Screen name="posts/[...id]" options={{ presentation: "modal" }} /> */}
             <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-            <Stack.Screen name="likes" options={{ presentation: "modal" }} />
           </Stack>
         </ThreadProvdier>
       </ThemeProvider>

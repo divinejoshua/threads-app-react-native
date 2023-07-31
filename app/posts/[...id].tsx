@@ -181,7 +181,7 @@ function PostFooter({ threadId }: { threadId: string }) {
   }, [threads, threadId, updatedThreadId]);
 
   return (
-    <Pressable  onPress={() => router.push('/posts/5be4b5cb-89cb-439b-b0a4-dcb2a539bf2e/likes')}>
+    <Pressable  onPress={() => router.push({ pathname: "/posts/likes", params: { id: threadId } })}>
       <Text style={{ color: "gray", marginLeft:5 }}>
         {replies} replies · {likes} likes 
       </Text>
