@@ -2,33 +2,24 @@ import { View, Text } from '../../components/Themed'
 import React from 'react'
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { useColorScheme } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Colors from '../../constants/Colors';
 
 export default function likedUsers() {
+
+    // Get theme 
+    const currentTheme = useColorScheme();
+    const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
+    const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
+    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
+
+
   return (
-    <View style={styles.container}>
-    <Text style={styles.title}>All likes will be displayed here</Text>
-    <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-    <EditScreenInfo path="app/likes" />
-  </View>
+    <SafeAreaView style={{backgroundColor: backgroundColor, flex: 1,}}>
+      <Text>All likes will be displayed here</Text>
+      <View lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <EditScreenInfo path="app/likes" />
+    </SafeAreaView>
   )
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    title: {
-      fontSize: 20,
-      fontWeight: 'bold',
-    },
-    separator: {
-      marginVertical: 30,
-      height: 1,
-      width: '80%',
-    },
-  });
-
