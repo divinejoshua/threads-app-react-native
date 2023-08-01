@@ -8,6 +8,7 @@ const useGetUsers = () => {
    
        const getUsers = () : void =>{
 
+        // Get the user data from the json file 
         let objectData = []
         objectData = require("../assets/data/users.json")
         let users = objectData.users
@@ -15,9 +16,6 @@ const useGetUsers = () => {
         
         // save the thread posts to store 
         setUsers(users)
-
-        console.log("gothere")
-
     }
    
     return { getUsers };
