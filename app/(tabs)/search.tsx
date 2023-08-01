@@ -37,12 +37,8 @@ return (
         <Link href="/accounts/login" >
           <Text>Go to home screen!</Text>
         </Link>
-
-        <Link href="/posts/rest" >
-          <Text>Go to home screen!</Text>
-        </Link>
- </ScrollView>
- </SafeAreaView>
+    </ScrollView>
+    </SafeAreaView>
 )
 }
 
