@@ -29,14 +29,14 @@ return (
        marginTop: 10
      }}
    >
-
+{/* 
       <Link href="/accounts" >
           <Text>Go to home screen!</Text>
         </Link>
 
         <Link href="/accounts/login" >
           <Text>Go to home screen!</Text>
-        </Link>
+        </Link> */}
     </ScrollView>
     </SafeAreaView>
 )
