@@ -145,13 +145,16 @@ function PostHeading({
             transition={500}
       />
 
+      {/* Name of user */}
         <Text style={{ fontWeight: "600" }}>{name}</Text>
         {verified && (
           <MaterialIcons name="verified" size={14} color="#60a5fa" />
         )}
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-        <Text style={{ color: "gray" }}>{timeAgo(createdAt)}</Text>
+
+      {/* Right side  */}
+      <View style={{ flexDirection: "row", alignSelf: "center", gap: 10 }}>
+        <Text style={{ color: "gray" }}> {timeAgo(createdAt)}</Text>
         <Feather name="more-horizontal" size={14} color="gray" />
       </View>
     </View>

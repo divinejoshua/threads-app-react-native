@@ -90,14 +90,18 @@ function PostHeading({
         alignItems: "center",
         justifyContent: "space-between",
         flexGrow: 1,
+        width: "100%",
       }}
     >
+      {/* Left content  */}
       <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
         <Text style={{ fontWeight: "600" }}>{name}</Text>
         {verified && (
           <MaterialIcons name="verified" size={14} color="#60a5fa" />
         )}
       </View>
+
+      {/* Right content  */}
       <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
         <Text style={{ color: "gray" }}>{timeAgo(createdAt)}</Text>
         <Feather name="more-horizontal" size={14} color="gray" />
