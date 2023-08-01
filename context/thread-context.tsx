@@ -10,14 +10,18 @@ interface ThreadContextValue {
   setThreads: Dispatch<SetStateAction<Thread[]>>;
   updatedThreadId : string
   setUpdatedThreadId : Dispatch<SetStateAction<string>>
+  users: [];
+  setUsers: Dispatch<SetStateAction<[]>>;
 }
 
 // Use the defined type for createContext
 export const ThreadContext = createContext<ThreadContextValue>({
   threads: [],
+  users: [],
   updatedThreadId : "",
   setThreads: () => {},
   setUpdatedThreadId: () => {},
+  setUsers: () => {},
 
 });
 
@@ -30,6 +34,7 @@ export const ThreadProvdier = ({
 }: PropsWithChildren ): JSX.Element => {
   const [threads, setThreads] = useState<Thread[]>([]);
   const [updatedThreadId, setUpdatedThreadId] = useState<string>("")
+  const [users, setUsers] = useState<[]>([])
 
     useEffect(() => {
 
@@ -61,6 +66,13 @@ export const ThreadProvdier = ({
   }, []);
 
   return (
-    <ThreadContext.Provider value={{threads, setThreads, updatedThreadId, setUpdatedThreadId}}>{children}</ThreadContext.Provider>
+    <ThreadContext.Provider value={{
+      threads, 
+      setThreads, 
+      updatedThreadId, 
+      setUpdatedThreadId,
+      users,
+      setUsers
+    }}>{children}</ThreadContext.Provider>
   );
 };

@@ -23,7 +23,7 @@ const blurhash =
 
 export default function PostItem(): JSX.Element {
    // @ts-ignore: Unreachable code error
-  const { id }  = useSearchParams()
+  const { id }  = useSearchParams() // get ID of the page from search params
 
   const {threads } = useContext(ThreadContext);
 

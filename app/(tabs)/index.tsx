@@ -13,6 +13,7 @@ import { Text, View } from "../../components/Themed";
 import { Image } from "expo-image";
 import Colors from "../../constants/Colors";
 import useChooseFile from "../../utils/choose-file";
+import useGetUsers from "../../utils/get-users";
 
 
 export default function TabOneScreen() {
@@ -23,7 +24,11 @@ export default function TabOneScreen() {
     const currentTheme = useColorScheme();
     const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
 
+    // Get Posts 
     const { getPosts } = useChooseFile()
+
+    // Get Users 
+    const { getUsers } = useGetUsers()
     
     
   
@@ -45,6 +50,10 @@ export default function TabOneScreen() {
   }
 
   useEffect(() => {
+
+    //Get users
+    getUsers()
+
     // Set loading to true 
     setisRefreshing(true)
 
