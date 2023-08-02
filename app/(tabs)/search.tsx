@@ -29,7 +29,7 @@ return (
        marginTop: 10
      }}
    >
-{/* 
+{/*  
       <Link href="/accounts" >
           <Text>Go to home screen!</Text>
         </Link>
