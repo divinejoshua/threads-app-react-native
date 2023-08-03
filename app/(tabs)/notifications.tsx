@@ -4,6 +4,7 @@ import Colors from '../../constants/Colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { View, Text } from '../../components/Themed';
+import { Image } from 'expo-image';
 
 export default function NotificationScreen () {
  // Get theme 
@@ -17,17 +18,31 @@ return (
  // Main 
  <SafeAreaView  style={[styles.container, {backgroundColor: backgroundColor, flex: 1,}]} >
      {/* Header text  */}
-   <Text style={styles.title}>Activity</Text>
+  
+     <Text style={styles.title}>Activity</Text>
+
 
    {/* Scroll view  */}
-   <ScrollView
+   {/* <ScrollView
      contentContainerStyle={{
        paddingTop: Platform.select({ android: 30 }),
        paddingHorizontal: 15,
        marginTop: 10
      }}
    >
- </ScrollView>
+   
+ </ScrollView> */}
+        <View style={{flex:1, justifyContent: 'center', alignItems:'center'}}>
+
+          {/* Animation  */}
+           <Image
+            style ={styles.animationImage}
+            source={require('../../assets/images/handshake.gif')}
+          />
+
+          {/* Text */}
+        <Text style={{fontSize:17, color: "#bcbcbc"}}>You have no notifications!!!</Text>
+        </View>
  </SafeAreaView>
 )
 }
@@ -49,5 +64,12 @@ const styles = StyleSheet.create({
    marginVertical: 30,
    height: 1,
    width: '80%',
+ },
+
+ animationImage: {
+  width: 100, 
+  height:100, 
+  borderRadius: 100,
+  marginBottom:20,
  },
 });
