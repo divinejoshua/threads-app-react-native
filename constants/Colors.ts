@@ -9,7 +9,7 @@ export default {
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
     borderColor: "#dddddd",
-    textInputBackground: "#efefef",
+    textInputBackground: "#f0f0f0",
   },
   dark: {
     text: "#fff",

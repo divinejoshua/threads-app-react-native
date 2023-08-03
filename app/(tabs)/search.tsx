@@ -6,6 +6,8 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { View, Text } from '../../components/Themed';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Link } from 'expo-router';
+import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
+
 
 export default function SearchScreen () {
  // Get theme 
@@ -30,10 +32,15 @@ return (
     {/* Header text  */}
     <Text style={styles.title}>Search</Text>
 
-      <TextInput
-      style={[styles.searchInput, {color: textColor, backgroundColor: textInputBackground}]}
-        placeholder="Search wetroverse..."
-      />
+    <View style={[styles.searchSection, {backgroundColor: textInputBackground}]}>
+    {/* <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor}  /> */}
+    <Ionicons style={styles.searchIcon} name="ios-search" size={18} color="#bcbcbc"/>
+    <TextInput
+        style={[styles.searchInput, {color: textColor}]}
+        placeholder="User Nickname"
+        underlineColorAndroid="transparent"
+    />
+</View>
 
     </ScrollView>
     </SafeAreaView>
@@ -58,12 +65,25 @@ const styles = StyleSheet.create({
    height: 1,
    width: '80%',
  },
- searchInput:{
-  marginTop: 15,
-  height: 37,
+ 
+ searchSection: {
+  flexDirection: 'row',
+  width: '100%',
+  marginTop:20,
+  borderRadius:10,
+  paddingLeft:10
+},
+searchIcon: {
+  marginTop:7,
+},
+searchInput: {
+  width: '100%',
+  height: 40,
   fontSize:16,
   paddingLeft:10,
   paddingRight:10,
   borderRadius:7,
- }
+},
+
+
 });
