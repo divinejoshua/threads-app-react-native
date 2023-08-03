@@ -40,6 +40,8 @@ export default function likedUsers() {
       <FlatList
         data={users}
         renderItem={({ item }) => <UserItem user={item} />}
+       // @ts-ignore: Unreachable code error
+        keyExtractor={(item) => item.id}
       />
     </View>
   )

@@ -1,12 +1,14 @@
 import {  useColorScheme, Platform, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Colors from '../../constants/Colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { FlatList, ScrollView, TextInput } from 'react-native-gesture-handler';
 import { View, Text } from '../../components/Themed';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Link } from 'expo-router';
 import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import UserItem from '../../components/UserItem';
+import { ThreadContext } from '../../context/thread-context';
 
 
 export default function SearchScreen () {
@@ -16,7 +18,37 @@ export default function SearchScreen () {
  const textInputBackground = currentTheme === "light" ? Colors.light.textInputBackground :Colors.dark.textInputBackground
  const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
 
+  // Data from state 
+  const {users : usersFromState, threads} = useContext(ThreadContext);
 
+
+ //Data
+ const [searchText, setsearchText] = useState<string>("")
+ const [userList, setuserList] = useState<any>([...usersFromState])
+
+
+
+  const searchFilter = (searchInput: string) => {
+
+    // Check if there is an input 
+    const regex = /^\s+/;
+    if (regex.test(searchInput)) {
+      // return if no input 
+      return;
+    }
+
+    // Set the search input
+    setsearchText(searchInput)
+
+    // Filter through the data 
+    setuserList(
+      usersFromState.filter((userList:any) => 
+        userList.username.toLowerCase().includes(searchInput.toLocaleLowerCase()) || 
+        userList.firstName.toLowerCase().includes(searchInput.toLocaleLowerCase()) ||
+        userList.lastName.toLowerCase().includes(searchInput.toLocaleLowerCase())
+      )
+    )
+  }
 
 
 return (
@@ -32,17 +64,34 @@ return (
     {/* Header text  */}
     <Text style={styles.title}>Search</Text>
 
+    {/* Search bar  */}
     <View style={[styles.searchSection, {backgroundColor: textInputBackground}]}>
-    <Ionicons style={styles.searchIcon} name="ios-search" size={18} color="#bcbcbc"/>
-    <TextInput
-        style={[styles.searchInput, {color: textColor}]}
-        placeholder="Search wetroverse"
-        returnKeyType="search"
-        underlineColorAndroid="transparent"
-         selectionColor={"#bcbcbc"}
-    />
-</View>
 
+      {/* Search icon  */}
+      <Ionicons style={styles.searchIcon} name="ios-search" size={18} color="#bcbcbc"/>
+
+     {/* search text input */}
+      <TextInput
+          style={[styles.searchInput, {color: textColor}]}
+          placeholder="Search wetroverse"
+          returnKeyType="search"
+          underlineColorAndroid="transparent"
+          selectionColor={"#bcbcbc"}
+          onChangeText={searchTerm => searchFilter(searchTerm)}
+      />
+    </View>
+
+    {/* Users list  */}
+    <View style={{marginTop:15}}>
+      {userList.map((users: []) => (
+            <UserItem 
+              // @ts-ignore: Unreachable code error
+              key={users.id} 
+              user={users}
+            />
+      ))}
+    </View>
+  
     </ScrollView>
     </SafeAreaView>
 )

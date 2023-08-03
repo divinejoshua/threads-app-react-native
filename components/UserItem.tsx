@@ -1,9 +1,11 @@
 import { StyleSheet, useColorScheme } from 'react-native';
 import { View, Text } from '../components/Themed'
-import React from 'react'
+import React, { useState } from 'react'
 import { Image } from 'expo-image';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../constants/Colors';
+import * as Haptics from 'expo-haptics';
+
 
 export default function UserItem({ user } : { user : object | any}) {
 
@@ -11,20 +13,37 @@ export default function UserItem({ user } : { user : object | any}) {
     const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
     const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
     const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
+    const [isFollowing, setisFollowing] = useState<Boolean>(false)
 
-
+    // follow user / unfollow user 
+    const followUser = () =>{
+      setisFollowing((prevIsLiked) => !prevIsLiked);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+    }
 
 
   return (
     <View style={[styles.container]}>
         <Image source={user.image} style={[styles.profileImage, {borderColor: borderColor}]} />
-            <View style={styles.userInfo}>
-            <Text style={styles.fullName}>{user.firstName} {user.lastName}</Text>
-            <Text style={styles.username}>{user.username}</Text>
-            </View>
-        <TouchableOpacity style={[styles.followButton, {borderColor: borderColor}]}>
-            <Text style={styles.followButtonText}>Follow</Text>
-        </TouchableOpacity>
+        <View style={styles.userInfo}>
+          <Text style={styles.fullName}>{user.firstName} {user.lastName}</Text>
+          <Text style={styles.username}>{user.username}</Text>
+        </View>
+
+
+      
+        {isFollowing ?
+
+            //  If is following  
+            <TouchableOpacity onPress={()=> followUser()}  style={[styles.followButton, {borderColor: borderColor}]}>
+              <Text style={styles.followButtonText}>following</Text>
+            </TouchableOpacity>
+        :
+            // If logged in user is not following
+            <TouchableOpacity onPress={()=> followUser()} style={[styles.followButton, {backgroundColor: "#3b82f6"}]}>
+                <Text style={styles.followButtonText}>follow</Text>
+            </TouchableOpacity>
+         }
   </View>
 );
   
@@ -37,8 +56,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       paddingTop: 10,
       paddingBottom: 10,
-      paddingRight: 15,
-      paddingLeft: 15,
     },
     profileImage: {
         width: 50,
@@ -59,7 +76,18 @@ const styles = StyleSheet.create({
       color: 'gray',
     },
     followButton: {
-      paddingHorizontal: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 100,
+      paddingVertical: 8,
+      borderRadius: 7,
+      borderWidth: 1,
+
+    },
+    followingButton: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 100,
       paddingVertical: 8,
       borderRadius: 7,
       borderWidth: 1,
