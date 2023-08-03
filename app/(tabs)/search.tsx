@@ -11,7 +11,9 @@ export default function SearchScreen () {
  // Get theme 
  const currentTheme = useColorScheme();
  const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
+ const textInputBackground = currentTheme === "light" ? Colors.light.textInputBackground :Colors.dark.textInputBackground
  const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
+
 
 
 
@@ -29,7 +31,7 @@ return (
     <Text style={styles.title}>Search</Text>
 
       <TextInput
-      style={styles.searchInput}
+      style={[styles.searchInput, {color: textColor, backgroundColor: textInputBackground}]}
         placeholder="Search wetroverse..."
       />
 
@@ -62,7 +64,6 @@ const styles = StyleSheet.create({
   fontSize:16,
   paddingLeft:10,
   paddingRight:10,
-  backgroundColor: "#efefef",
   borderRadius:7,
  }
 });
