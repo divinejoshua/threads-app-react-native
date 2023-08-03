@@ -2,7 +2,7 @@ import {  useColorScheme, Platform, StyleSheet } from 'react-native'
 import React from 'react'
 import Colors from '../../constants/Colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { View, Text } from '../../components/Themed';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Link } from 'expo-router';
@@ -18,25 +18,21 @@ export default function SearchScreen () {
 return (
  // Main 
  <SafeAreaView  style={[styles.container, {backgroundColor: backgroundColor, flex: 1,}]} >
-     {/* Header text  */}
-   <Text style={styles.title}>Search</Text>
-
    {/* Scroll view  */}
    <ScrollView
      contentContainerStyle={{
        paddingTop: Platform.select({ android: 30 }),
        paddingHorizontal: 15,
-       marginTop: 10
      }}
    >
-{/*  
-      <Link href="/accounts" >
-          <Text>Go to home screen!</Text>
-        </Link>
+    {/* Header text  */}
+    <Text style={styles.title}>Search</Text>
 
-        <Link href="/accounts/login" >
-          <Text>Go to home screen!</Text>
-        </Link> */}
+      <TextInput
+      style={styles.searchInput}
+        placeholder="Search wetroverse..."
+      />
+
     </ScrollView>
     </SafeAreaView>
 )
@@ -48,8 +44,8 @@ return (
 const styles = StyleSheet.create({
  container: {
      paddingTop:20,
-     paddingLeft:20,
-     paddingRight:20,
+     paddingLeft:5,
+     paddingRight:5,
  },
  title: {
    fontSize: 30,
@@ -60,4 +56,13 @@ const styles = StyleSheet.create({
    height: 1,
    width: '80%',
  },
+ searchInput:{
+  marginTop: 15,
+  height: 37,
+  fontSize:16,
+  paddingLeft:10,
+  paddingRight:10,
+  backgroundColor: "#efefef",
+  borderRadius:7,
+ }
 });
