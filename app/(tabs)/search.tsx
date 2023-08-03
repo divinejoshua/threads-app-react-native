@@ -39,6 +39,7 @@ return (
         placeholder="Search wetroverse"
         returnKeyType="search"
         underlineColorAndroid="transparent"
+         selectionColor={"#bcbcbc"}
     />
 </View>
 
