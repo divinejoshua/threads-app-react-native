@@ -33,11 +33,11 @@ return (
     <Text style={styles.title}>Search</Text>
 
     <View style={[styles.searchSection, {backgroundColor: textInputBackground}]}>
-    {/* <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor}  /> */}
     <Ionicons style={styles.searchIcon} name="ios-search" size={18} color="#bcbcbc"/>
     <TextInput
         style={[styles.searchInput, {color: textColor}]}
-        placeholder="User Nickname"
+        placeholder="Search wetroverse"
+        returnKeyType="search"
         underlineColorAndroid="transparent"
     />
 </View>
@@ -73,15 +73,17 @@ const styles = StyleSheet.create({
   borderRadius:10,
   paddingLeft:10
 },
+
 searchIcon: {
-  marginTop:7,
-},
+  marginTop:10,
+}, 
+
 searchInput: {
   width: '100%',
   height: 40,
   fontSize:16,
-  paddingLeft:10,
-  paddingRight:10,
+  paddingLeft:7,
+  paddingRight:7,
   borderRadius:7,
 },
 
