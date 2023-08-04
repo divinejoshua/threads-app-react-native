@@ -42,6 +42,7 @@ export default function likedUsers() {
         renderItem={({ item }) => <UserItem user={item} />}
        // @ts-ignore: Unreachable code error
         keyExtractor={(item) => item.id}
+        style={{paddingHorizontal:10}}
       />
     </View>
   )
