@@ -30,7 +30,7 @@ export default function  ProfileScreen () {
         // Left header button
         headerLeft: () => (
           <TouchableOpacity style={{marginLeft:20}}>
-             <Feather  name="globe" size={18}/>
+             <Feather  name="globe" size={18} color={textColor}/>
             {/* <Text style={{fontWeight:'600', fontSize:16}}>Cancel</Text> */}
           </TouchableOpacity>
    
@@ -39,7 +39,7 @@ export default function  ProfileScreen () {
         // Right header button
         headerRight: () => (
           <TouchableOpacity style={{marginRight:20}}>
-              <Feather  name="menu" size={18}/>
+              <Feather  name="menu" size={18} color={textColor}/>
           </TouchableOpacity>
 
         ),
