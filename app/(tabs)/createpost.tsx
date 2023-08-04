@@ -21,7 +21,7 @@ const [threadMessage, setthreadMessage] = useState<string>("")
 const goBack = ()=>{
   // Set threadmessage to empty string before going bac 
   setthreadMessage("")
-  // router.back()
+  router.back()
 }
 
 //  Send post function 
@@ -95,7 +95,7 @@ return (
 
 const styles = StyleSheet.create({
  container: {
-     paddingTop:-30,
+     paddingTop:-35,
      paddingLeft:20,
      paddingRight:20,
  },
