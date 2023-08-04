@@ -4,7 +4,9 @@ import { Stack } from 'expo-router'
 import { ScrollView } from 'react-native-gesture-handler'
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
-import { Platform, useColorScheme, StyleSheet } from 'react-native';
+import { Platform, useColorScheme, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
+
 import Colors from '../../constants/Colors';
 
 export default function  ProfileScreen () {
@@ -18,8 +20,34 @@ export default function  ProfileScreen () {
   return (
     // Main 
     <SafeAreaView  style={[styles.container, {backgroundColor: backgroundColor, flex: 1,}]} >
-        {/* Header text  */}
-      <Text style={styles.title}>Profile</Text>
+       <Stack.Screen options={{
+         headerShadowVisible: true, 
+         headerBackTitle: 'Back',
+         headerTitle:'Profile',
+         headerStyle: {
+          backgroundColor: backgroundColor,
+        },
+        // Left header button
+        headerLeft: () => (
+          <TouchableOpacity style={{marginLeft:20}}>
+             <Feather  name="globe" size={18}/>
+            {/* <Text style={{fontWeight:'600', fontSize:16}}>Cancel</Text> */}
+          </TouchableOpacity>
+   
+        ),
+
+        // Right header button
+        headerRight: () => (
+          <Pressable style={{marginRight:20}}>
+              <Feather  name="menu" size={18}/>
+          </Pressable>
+
+        ),
+        headerBackTitleStyle: {
+          fontSize:14
+        },
+      }} />
+
 
       {/* Scroll view  */}
       <ScrollView
