@@ -37,11 +37,12 @@ return (
           {/* Animation  */}
            <Image
             style ={styles.animationImage}
-            source={require('../../assets/images/handshake.gif')}
+            source={require('../../assets/images/bell.gif')}
           />
 
           {/* Text */}
-        <Text style={{fontSize:17, color: "#bcbcbc"}}>You have no notifications!!!</Text>
+        <Text style={{fontSize:23,fontWeight : '600', marginBottom:15}}>No notice right now</Text>
+        <Text style={{fontSize:16, color: "#bcbcbc"}}>You are up to date</Text>
         </View>
  </SafeAreaView>
 )
@@ -67,8 +68,8 @@ const styles = StyleSheet.create({
  },
 
  animationImage: {
-  width: 100, 
-  height:100, 
+  width: 70, 
+  height:70, 
   borderRadius: 100,
   marginBottom:20,
  },

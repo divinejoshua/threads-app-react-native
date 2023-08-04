@@ -35,13 +35,13 @@ export default function UserItem({ user } : { user : object | any}) {
         {isFollowing ?
 
             //  If is following  
-            <TouchableOpacity onPress={()=> followUser()}  style={[styles.followButton, {borderColor: borderColor}]}>
+            <TouchableOpacity onPress={()=> followUser()}  style={[styles.followingButton, {borderColor: borderColor}]}>
               <Text style={styles.followButtonText}>following</Text>
             </TouchableOpacity>
         :
             // If logged in user is not following
             <TouchableOpacity onPress={()=> followUser()} style={[styles.followButton, {backgroundColor: "#3b82f6"}]}>
-                <Text style={styles.followButtonText}>follow</Text>
+                <Text style={[styles.followButtonText,{color:"#fff"}]}>follow</Text>
             </TouchableOpacity>
          }
   </View>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     username: {
       color: 'gray',
     },
-    followButton: {
+    followingButton: {
       justifyContent: 'center',
       alignItems: 'center',
       width: 100,
@@ -84,13 +84,12 @@ const styles = StyleSheet.create({
       borderWidth: 1,
 
     },
-    followingButton: {
+    followButton: {
       justifyContent: 'center',
       alignItems: 'center',
       width: 100,
       paddingVertical: 8,
       borderRadius: 7,
-      borderWidth: 1,
 
     },
     followButtonText: {
