@@ -42,7 +42,8 @@ export default function TabLayout() {
         name="createpost"
         options={{
           title: "",
-          tabBarIcon: ({ color }) => <TabBarIcon name="edit" color={color} />,
+          headerShown:true,
+          tabBarIcon: ({ color }) => <TabBarIcon name="edit" color={color}/>,
         }}
       />
        <Tabs.Screen

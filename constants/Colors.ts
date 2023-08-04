@@ -10,6 +10,7 @@ export default {
     tabIconSelected: tintColorLight,
     borderColor: "#dddddd",
     textInputBackground: "#f0f0f0",
+    fadedText:'#777'
   },
   dark: {
     text: "#fff",
@@ -19,5 +20,7 @@ export default {
     borderColor: "#ffffff20",
     tabIconSelected: tintColorDark,
     textInputBackground: "#333",
+    fadedText:'#777'
+
   },
 };

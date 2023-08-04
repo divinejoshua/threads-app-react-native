@@ -21,17 +21,6 @@ return (
   
      <Text style={styles.title}>Activity</Text>
 
-
-   {/* Scroll view  */}
-   {/* <ScrollView
-     contentContainerStyle={{
-       paddingTop: Platform.select({ android: 30 }),
-       paddingHorizontal: 15,
-       marginTop: 10
-     }}
-   >
-   
- </ScrollView> */}
         <View style={{flex:1, justifyContent: 'center', alignItems:'center'}}>
 
           {/* Animation  */}
