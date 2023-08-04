@@ -206,6 +206,8 @@ function BottomIcons({threadId}: { threadId: string }) {
   const iconColor = currentTheme === "light" ? Colors?.light.text :Colors.dark.text;
 
   const [isLiked, setisLiked] = useState<boolean>(false)
+  const [isRetweet, setisRetweet] = useState<boolean>(false)
+
 
   // Click Like button 
   const clickLikeButton = () => {
@@ -215,6 +217,13 @@ function BottomIcons({threadId}: { threadId: string }) {
       () => {updateLikeCount()}
       )
   }
+
+    // Click on the retweet button 
+    const clickRetweet = () =>{
+      setisRetweet((prevIsLiked) => !prevIsLiked);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+    }
+  
 
   // Updating the like count function 
   const updateLikeCount = async ()=>{
@@ -252,8 +261,12 @@ function BottomIcons({threadId}: { threadId: string }) {
       </TouchableOpacity>
 
       {/* Retweet button  */}
-      <TouchableOpacity style={styles.postButtons}>
+      <TouchableOpacity onPress={clickRetweet} style={styles.postButtons}>
+      {/* If post is retweeted or not  */}
+      {isRetweet ? 
+        <AntDesign name="retweet" size={iconSize} color={"#10b981"} />: 
         <AntDesign name="retweet" size={iconSize} color={iconColor} />
+      }
       </TouchableOpacity>
 
       {/* Share button  */}
