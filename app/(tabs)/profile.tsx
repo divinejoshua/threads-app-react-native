@@ -38,9 +38,9 @@ export default function  ProfileScreen () {
 
         // Right header button
         headerRight: () => (
-          <Pressable style={{marginRight:20}}>
+          <TouchableOpacity style={{marginRight:20}}>
               <Feather  name="menu" size={18}/>
-          </Pressable>
+          </TouchableOpacity>
 
         ),
         headerBackTitleStyle: {
