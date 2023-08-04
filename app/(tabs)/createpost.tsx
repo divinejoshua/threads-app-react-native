@@ -47,8 +47,7 @@ const goBack = ()=>{
   // Set loading to true after few seconds and go back
   setTimeout(() => {
     setisLoading(false);
-    setthreadMessage("")
-    router.back()
+    goBack()
   }, 2000);
 
 
@@ -103,6 +102,7 @@ return (
     multiline={true}
     style={{ height:200, fontSize: 18, textAlignVertical: 'top', color: textColor}}
     placeholder='What is happening...'
+    placeholderTextColor={"#9a9a9a"}
     autoFocus={true}
     selectionColor={"#bcbcbc"}
     maxLength={140}
