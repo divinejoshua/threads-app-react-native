@@ -1,10 +1,10 @@
-import {  useColorScheme, Platform, StyleSheet, TextInput, TouchableOpacity, Button, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import {  useColorScheme, Platform, StyleSheet, TextInput, TouchableOpacity, Button, Pressable, ActivityIndicator } from 'react-native'
 import Colors from '../../constants/Colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { View, Text } from '../../components/Themed';
-import { Stack, router } from 'expo-router';
+import { Stack, router, } from 'expo-router';
+import { useState } from 'react';
 
 export default function CreatePostScreen () {
  // Get theme 
@@ -27,12 +27,27 @@ const goBack = ()=>{
 //  Send post function 
  const sendPost = () =>{
 
+  // Return if isLoading is set to true 
+  if(isLoading) return
+
+  // If threadMessage lenght is less than one, then retuen 
+  if(threadMessage.length < 1){
+    return
+  }
+  // Return if post has no Value 
+  const regex = /^\s+/;
+  if (regex.test(threadMessage)) {
+    return;
+  }
+
+
   // Set loading to default 
-  setisLoading(false)
+  setisLoading(true)
 
   // Set loading to true after few seconds and go back
   setTimeout(() => {
-    setisLoading(true);
+    setisLoading(false);
+    setthreadMessage("")
     router.back()
   }, 2000);
 
@@ -62,7 +77,19 @@ return (
         // Right header button
         headerRight: () => (
           <Pressable onPress={()=> sendPost()} style={{marginRight:20}}>
-            <Text style={{fontWeight:'600', color:'#3b82f6', fontSize:16}}>Post</Text>
+            {isLoading ? 
+
+            // If loading is set to true
+              <ActivityIndicator />
+            : 
+          // If no loading, then show the post button 
+              <Text style={{fontWeight:'600', 
+                color: threadMessage.length > 0?'#3b82f6':'#555', 
+                fontSize:16}}
+              >Post</Text>
+            }
+            
+            {/*  */}
           </Pressable>
 
         ),
