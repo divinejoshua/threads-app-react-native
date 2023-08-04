@@ -79,6 +79,7 @@ return (
     autoFocus={true}
     selectionColor={"#bcbcbc"}
     maxLength={140}
+    value={threadMessage}
     onChangeText={text => setthreadMessage(text)}
     editable={!isLoading}
 
