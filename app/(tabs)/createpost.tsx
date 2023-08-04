@@ -1,4 +1,4 @@
-import {  useColorScheme, Platform, StyleSheet, TextInput, TouchableOpacity, Button } from 'react-native'
+import {  useColorScheme, Platform, StyleSheet, TextInput, TouchableOpacity, Button, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import Colors from '../../constants/Colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -61,9 +61,9 @@ return (
 
         // Right header button
         headerRight: () => (
-          <TouchableOpacity onPress={()=> sendPost()} style={{marginRight:20}}>
+          <Pressable onPress={()=> sendPost()} style={{marginRight:20}}>
             <Text style={{fontWeight:'600', color:'#3b82f6', fontSize:16}}>Post</Text>
-          </TouchableOpacity>
+          </Pressable>
 
         ),
         headerBackTitleStyle: {
@@ -74,7 +74,7 @@ return (
    {/* Text Input  */}
    <TextInput
     multiline={true}
-    style={{ height:200, fontSize: 17, textAlignVertical: 'top', color: textColor}}
+    style={{ height:200, fontSize: 18, textAlignVertical: 'top', color: textColor}}
     placeholder='What is happening...'
     autoFocus={true}
     selectionColor={"#bcbcbc"}
@@ -95,7 +95,7 @@ return (
 
 const styles = StyleSheet.create({
  container: {
-     paddingTop:-35,
+     paddingTop:-30,
      paddingLeft:20,
      paddingRight:20,
  },
