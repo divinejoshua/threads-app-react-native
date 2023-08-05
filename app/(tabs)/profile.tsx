@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Link, Stack } from 'expo-router'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -6,7 +6,7 @@ import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
 import { Platform, useColorScheme, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
-
+import * as Haptics from 'expo-haptics';
 import Colors from '../../constants/Colors';
 import { Image } from 'expo-image';
 
@@ -15,6 +15,20 @@ export default function  ProfileScreen () {
     const currentTheme = useColorScheme();
     const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
     const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
+    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
+
+
+    const [isFollowing, setisFollowing] = useState<Boolean>(false)
+
+    // follow user / unfollow user 
+    const followUser = () =>{
+      setisFollowing((prevIsLiked) => !prevIsLiked);
+
+      // Only vibrate when the user is following 
+      if(isFollowing===false){
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+      }
+    }
 
 
   
@@ -89,11 +103,45 @@ export default function  ProfileScreen () {
         </View>
 
 
-    {/* User name / Fullname  */}
+    {/* User Info */}
         <View style={{marginTop:20}}>
+
+            {/* Full name  */}
             <Text style={{fontSize: 17, fontWeight:'600', }}>Eren Yeager <MaterialIcons name="verified" size={14} color="#60a5fa" /></Text> 
+
+            {/* Username  */}
             <Text style={{marginTop:5, color:'#aaaaaa', }}>@yeager</Text>
-          </View>
+
+            {/* Bio  */}
+            <Text style={{marginTop:5, lineHeight:23, letterSpacing:.1 }}>
+                𝐸𝓈𝓉. 1894 ❤️ Love This City! 🏆 x1 UCL winners, 9x League champions, x1 WSL champions | 💬 Fan support: <Text style={{color:'#60a5fa'}}>@wetroverse</Text>
+            </Text>
+        </View>
+
+    {/* Action buttons  */}
+
+      <View style={styles.actionButtons}>
+
+        {/* If following  */}
+        {isFollowing ?
+
+          //  If is following  
+          <Pressable onPress={()=> followUser()}  style={[styles.followingButton, {borderColor: borderColor}]}>
+            <Text style={styles.followButtonText}>Following</Text>
+          </Pressable>
+          :
+          // If logged in user is not following
+          <Pressable onPress={()=> followUser()} style={[styles.followButton, {backgroundColor: "#3b82f6"}]}>
+              <Text style={[styles.followButtonText,{color:"#fff"}]}>Follow</Text>
+          </Pressable>
+        }
+
+        {/* Message button  */}
+        <Pressable style={[styles.followingButton, {borderColor: borderColor}]}>
+          <Text style={{fontWeight:'600'}}>Message</Text>
+        </Pressable>
+
+      </View>
 
 
     </View>
@@ -156,6 +204,35 @@ const styles = StyleSheet.create({
       fontWeight: "600",
       fontSize: 16,
       marginTop: 6
+    },
+
+    actionButtons:{
+      marginTop:20, 
+      flexDirection: 'row',
+      width: '100%',
+      gap:15,
+    },
+
+    followingButton: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: 8,
+      borderRadius: 7,
+      flex:5,
+      borderWidth: 1,
+
+    },
+    followButton: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 100,
+      flex:5,
+      paddingVertical: 8,
+      borderRadius: 7,
+
+    },
+    followButtonText: {
+      fontWeight: 'bold',
     },
   });
   

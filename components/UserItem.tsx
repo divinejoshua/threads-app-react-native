@@ -30,8 +30,6 @@ export default function UserItem({ user } : { user : object | any}) {
           <Text style={styles.username}>{user.username}</Text>
         </View>
 
-
-      
         {isFollowing ?
 
             //  If is following  
