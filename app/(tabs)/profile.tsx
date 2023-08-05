@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link, Stack } from 'expo-router'
+import { Link, Stack, router } from 'expo-router'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Text, View } from '../../components/Themed';
 import { useColorScheme, StyleSheet, Pressable, ListRenderItem } from 'react-native';
@@ -39,26 +39,93 @@ const ProfileTop = () => {
   }
 
   return (
-    <>
-    <View pointerEvents="box-none" style={styles.header}>
-      <View style={{marginTop:100}}>
-        
-        {/* <TouchableOpacity style={{marginTop: 50, borderWidth:10}}>  */}
-        <Link href="/search" style={{borderWidth:1, width:30}}><Text>Click</Text></Link>
-        {/* </TouchableOpacity> */}
 
-        {/* <TouchableOpacity style={{  marginTop: 80, borderWidth:10}}>  */}
-        <Link href="/search" style={{}}><Text>Click</Text></Link>
-        {/* </TouchableOpacity> */}
+    // Profile top 
+    <View  pointerEvents="box-none" style={styles.container} >
 
-        {/* <TouchableOpacity style={{ marginTop: 80, borderWidth:10}}>  */}
-        {/* <Link href="/search"><Text>Click</Text></Link> */}
-        {/* </TouchableOpacity> */}
+      {/* Profile card view  */}
+        {/* Profile card  */}
+        <View pointerEvents="box-none" style={styles.profileCard}>
+
+          {/* Profile Image  */}
+          <View pointerEvents="none" style={[{ flex: 3, }]}>
+            <Image 
+              style={styles.profileImage}
+              source={require('../../assets/images/profile.png')}
+            />
+          </View>
+
+          {/* Profile stats  */}
+          <View style={[{ flex: 7, }]} pointerEvents="box-none">
+              <View style={styles.profileStats}>
+
+              {/* Followers */}
+              <Pressable onPress={()=> router.push("/accounts/collapsible-tab")} style={styles.centeredView} >
+                  <Text style={styles.statsHeader}>Followers</Text>
+                  <Text style={styles.statsText}>16.2M</Text>
+              </Pressable>
+
+              {/* Followeing */}
+              <View style={styles.centeredView} >
+              <Link href="/accounts/collapse-tab2"><Text style={styles.statsHeader}>Following</Text></Link>
+                 <Text style={styles.statsText}>1,324</Text>
+              </View>
+
+              {/* Posts */}
+              <View style={styles.centeredView}>
+                <Text style={styles.statsHeader}>Posts</Text>
+                 <Text style={styles.statsText}>10.1K</Text>
+              </View>
+              </View>
+          </View>
 
         </View>
+
+
+    {/* User Info */}
+        <View style={{marginTop:20}} pointerEvents="none">
+
+            {/* Full name  */}
+            <Text style={{fontSize: 17, fontWeight:'600', }}>Eren Yeager <MaterialIcons name="verified" size={14} color="#60a5fa" /></Text> 
+
+            {/* Username  */}
+            <Text style={{marginTop:5, color:'#aaaaaa', }}>@yeager</Text>
+
+            {/* Bio  */}
+            <Text style={{marginTop:5, lineHeight:23, letterSpacing:.1 }}>
+                𝐸𝓈𝓉. 1894 ❤️ Love This City! 🏆 x1 UCL winners, 9x League champions, x1 WSL champions | 💬 Fan support: <Text style={{color:'#60a5fa'}}>@wetroverse</Text>
+            </Text>
+        </View>
+
+    {/* Action buttons  */}
+
+        <View style={styles.actionButtons}>
+  
+          {/* If following  */}
+          {isFollowing ?
+  
+            //  If is following  
+            <Pressable onPress={()=> followUser()}  style={[styles.followingButton, {borderColor: borderColor}]}>
+              <Text style={styles.followButtonText}>Following</Text>
+            </Pressable>
+            :
+            // If logged in user is not following
+            <Pressable onPress={()=> followUser()} style={[styles.followButton, {backgroundColor: "#3b82f6"}]}>
+                <Text style={[styles.followButtonText,{color:"#fff"}]}>Follow</Text>
+            </Pressable>
+          }
+  
+          {/* Message button  */}
+          <Pressable style={[styles.followingButton, {borderColor: borderColor}]}>
+            <Text style={{fontWeight:'600'}}>Message</Text>
+          </Pressable>
+  
+        </View>
+  
+  
+
     </View>
 
-    </>
     )
 }
 
@@ -251,6 +318,7 @@ const styles = StyleSheet.create({
       paddingVertical: 8,
       borderRadius: 7,
       flex:5,
+      width: 100,
       borderWidth: 1,
 
     },

@@ -105,3 +105,20 @@
   
 
   //   </View>
+
+
+
+
+
+
+  ////////////////////////////////////////////////////////////////
+
+
+//   <View pointerEvents="box-none" style={styles.header}>
+//   <View pointerEvents="box-none" style={{marginTop:100}}>
+//   <View pointerEvents="none" style={{marginTop:100}}><Text>The</Text></View>
+  
+//     <Link href="/search" style={{borderWidth:1, width:30}}><Text>Click</Text></Link>
+    
+//     </View>
+// </View>
