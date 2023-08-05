@@ -142,6 +142,7 @@ export default function  ProfileScreen () {
    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
 
 
+  //  Image list component 
   const imageListItem: ListRenderItem<number> = React.useCallback(({ index }) => {
     return (
       <View><Text>{index}</Text></View>
@@ -194,48 +195,53 @@ export default function  ProfileScreen () {
               shadowOffset: {
                   width: 0, height: 0 // for iOS
               },
+              backgroundColor:backgroundColor,
               borderBottomWidth:0.5,
               borderColor: borderColor,
               marginTop:-50,
+            
              
             }}
+            // This part targets the tabs header links
             renderTabBar={props => <MaterialTabBar {...props} 
-                indicatorStyle={{ backgroundColor:"#121212"}} 
-                
-                activeColor = "#121212"
-                inactiveColor ="#bcbcbc"
+                  indicatorStyle={{ backgroundColor:textColor, height:1}} 
+                  activeColor ={textColor}
+                  inactiveColor ="#999"
+                  labelStyle={{
+                    textTransform: "capitalize",
+                    fontWeight:'600',
+                  }}
                 />}
-            initialTabName="B" 
+                
+            initialTabName="Photos" //Initial tab name to start from
           >
 
             {/* Photo tab  */}
             <Tabs.Tab 
-            name="List 1" 
-            label={() =>  <Feather  name="menu" size={18} color={"#222"}/>}
+            name="Photos" 
+            // label={() =>  <Feather  name="menu" size={18} color={"#222"}/>}
             >
-              {/* <Tabs.FlatList
+              <Tabs.FlatList
                 data={DATA}
                 renderItem={imageListItem}
-              /> */}
+              />
 
-            <View style={[styles.box, styles.boxA]} />
-                <View style={[styles.box, styles.boxB]} />
             </Tabs.Tab>
 
             {/* Video Tab  */}
-            <Tabs.Tab name="B">
+            <Tabs.Tab name="Videos">
               <Tabs.ScrollView>
-                <View style={[styles.box, styles.boxA]} />
-                <View style={[styles.box, styles.boxB]} />
+                {/* <View style={[styles.box, styles.boxA]} /> */}
+                {/* <View style={[styles.box, styles.boxB]} /> */}
               </Tabs.ScrollView>
             </Tabs.Tab>
 
 
             {/* Tagged Tab  */}
-            <Tabs.Tab name="C">
+            <Tabs.Tab name="Tags">
               <Tabs.ScrollView>
-                <View style={[styles.box, styles.boxA]} />
-                <View style={[styles.box, styles.boxB]} />
+                {/* <View style={[styles.box, styles.boxA]} /> */}
+                {/* <View style={[styles.box, styles.boxB]} /> */}
               </Tabs.ScrollView>
             </Tabs.Tab>
           </Tabs.Container>
@@ -250,7 +256,8 @@ const styles = StyleSheet.create({
     container: {
         paddingLeft:20,
         paddingRight:20,
-        marginTop: 10,
+        paddingTop: 10,
+        paddingBottom:20,
         elevation: 0, // remove shadow on Android
         shadowOpacity: 0, // remove shadow on iOS
         shadowOffset: {
