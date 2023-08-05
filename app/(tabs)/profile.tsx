@@ -147,12 +147,11 @@ export default function  ProfileScreen () {
    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
 
 
+  //  Image List 
   const imageListItem: ListRenderItem<number> = React.useCallback(({ index }) => {
     return (
       <View><Text>{index}</Text></View>
     )
-
-    
   }, [])
 
   
