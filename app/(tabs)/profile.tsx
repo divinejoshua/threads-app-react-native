@@ -177,7 +177,7 @@ export default function  ProfileScreen () {
           // Right header button
           headerRight: () => (
             <TouchableOpacity style={{marginRight:20}}>
-                <Feather  name="menu" size={18} color={textColor}/>
+                <Feather name="menu" size={18} color={textColor}/>
             </TouchableOpacity>
 
           ),
@@ -195,22 +195,32 @@ export default function  ProfileScreen () {
             renderHeader={ProfileTop}
             headerHeight={HEADER_HEIGHT} // optional
             allowHeaderOverscroll={true}
-            containerStyle={{
-             
+            headerContainerStyle={{
+              backgroundColor:backgroundColor,
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              shadowOffset: {
+                  width: 0, height: 0 // for iOS
+              },
+              borderBottomWidth:.5,
+              borderBottomColor:borderColor,
             }}
             renderTabBar={props => <MaterialTabBar {...props} 
-                indicatorStyle={{ backgroundColor:"#121212"}} 
-                
-                activeColor = "#121212"
-                inactiveColor ="#bcbcbc"
+                indicatorStyle={{ backgroundColor:textColor}} 
+                activeColor = {textColor}
+                inactiveColor = {borderColor}   
+                labelStyle = {{
+                  textTransform:'capitalize'
+                }}
                 />}
-            initialTabName="B" 
+            initialTabName="Videos" 
           >
 
             {/* Photo tab  */}
             <Tabs.Tab 
-            name="List 1" 
-            label={() =>  <Feather  name="menu" size={18} color={"#222"}/>}
+              name="Photos" 
+              label={() =>  <Feather  name="menu" size={18} color={textColor}/>}
+            
             >
               <Tabs.FlatList
                 data={DATA}
@@ -219,7 +229,7 @@ export default function  ProfileScreen () {
             </Tabs.Tab>
 
             {/* Video Tab  */}
-            <Tabs.Tab name="B">
+            <Tabs.Tab name="Videos">
               <Tabs.ScrollView>
                 <View style={[styles.box, styles.boxA]} />
                 <View style={[styles.box, styles.boxB]} />
@@ -228,7 +238,7 @@ export default function  ProfileScreen () {
 
 
             {/* Tagged Tab  */}
-            <Tabs.Tab name="C">
+            <Tabs.Tab name="Tags">
               <Tabs.ScrollView>
                 <View style={[styles.box, styles.boxA]} />
                 <View style={[styles.box, styles.boxB]} />
@@ -307,6 +317,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       width: '100%',
       gap:10,
+      marginBottom:10,
     },
 
     followingButton: {
