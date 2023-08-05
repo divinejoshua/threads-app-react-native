@@ -25,7 +25,11 @@ const Example: React.FC = () => {
     <Tabs.Container
       renderHeader={Header}
       headerHeight={HEADER_HEIGHT} // optional
-      renderTabBar={props => <MaterialTabBar {...props} indicatorStyle={{ backgroundColor: 'red', }} />}
+      renderTabBar={props => <MaterialTabBar {...props} 
+          indicatorStyle={{ backgroundColor: 'red', width:1 }} 
+          activeColor = "red"
+          inactiveColor ="green"
+          />}
       initialTabName="B" 
     >
       <Tabs.Tab 
@@ -39,6 +43,12 @@ const Example: React.FC = () => {
         />
       </Tabs.Tab>
       <Tabs.Tab name="B">
+        <Tabs.ScrollView>
+          <View style={[styles.box, styles.boxA]} />
+          <View style={[styles.box, styles.boxB]} />
+        </Tabs.ScrollView>
+      </Tabs.Tab>
+      <Tabs.Tab name="C">
         <Tabs.ScrollView>
           <View style={[styles.box, styles.boxA]} />
           <View style={[styles.box, styles.boxB]} />
