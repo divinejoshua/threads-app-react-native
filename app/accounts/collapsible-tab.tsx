@@ -3,6 +3,8 @@ import React from 'react'
 import { StyleSheet, ListRenderItem } from 'react-native'
 import { MaterialTabBar, Tabs } from 'react-native-collapsible-tab-view'
 import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Link } from 'expo-router';
 
 // Note: Docs on collasable tab view is found here :https://github.com/PedroBern/react-native-collapsible-tab-view
 
@@ -13,7 +15,13 @@ const DATA = [0, 1, 2, 3, 4]
 const identity = (v: unknown): string => v + ''
 
 const Header = () => {
-  return <View pointerEvents="box-none" style={styles.header}></View>
+  return (
+  <View pointerEvents="box-none" style={styles.header}>
+    {/* <TouchableOpacity>  */}
+      <Link href="/search"><Text>Click</Text></Link>
+      {/* </TouchableOpacity> */}
+  </View>
+  )
 }
 
 const Example: React.FC = () => {
@@ -29,15 +37,13 @@ const Example: React.FC = () => {
 
   return (
     <Tabs.Container
-    
       renderHeader={Header}
       headerHeight={HEADER_HEIGHT} // optional
       allowHeaderOverscroll={true}
-      
       containerStyle={{
         elevation:0,
-      borderTopWidth:0,
-      boxShadow: '0px 0px 0px rgba(0,0,0,0.0)'
+        borderTopWidth:0,
+        boxShadow: '0px 0px 0px rgba(0,0,0,0.0)'
       }}
       renderTabBar={props => <MaterialTabBar {...props} 
           indicatorStyle={{ backgroundColor: 'red', maxWidth:5, height:5,borderRadius:100, left:'16%' }} 
