@@ -1,6 +1,6 @@
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Stack } from 'expo-router'
+import { Link, Stack } from 'expo-router'
 import { ScrollView } from 'react-native-gesture-handler'
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
@@ -31,7 +31,6 @@ export default function  ProfileScreen () {
         headerLeft: () => (
           <TouchableOpacity style={{marginLeft:20}}>
              <Feather  name="globe" size={18} color={textColor}/>
-            {/* <Text style={{fontWeight:'600', fontSize:16}}>Cancel</Text> */}
           </TouchableOpacity>
    
         ),
@@ -57,6 +56,7 @@ export default function  ProfileScreen () {
           marginTop: 10
         }}
       >
+        <Link href='/accounts/login'>Login page</Link>
     </ScrollView>
     </SafeAreaView>
   )
