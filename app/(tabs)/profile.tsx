@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
       marginTop:20, 
       flexDirection: 'row',
       width: '100%',
-      gap:15,
+      gap:10,
     },
 
     followingButton: {
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
 
     },
     followButtonText: {
-      fontWeight: 'bold',
+      fontWeight:'600'
     },
   });
   
