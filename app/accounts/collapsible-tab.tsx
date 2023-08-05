@@ -4,6 +4,8 @@ import { StyleSheet, ListRenderItem } from 'react-native'
 import { MaterialTabBar, Tabs } from 'react-native-collapsible-tab-view'
 import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 
+// Note: Docs on collasable tab view is found here :https://github.com/PedroBern/react-native-collapsible-tab-view
+
 
 const HEADER_HEIGHT = 250
 
@@ -11,25 +13,37 @@ const DATA = [0, 1, 2, 3, 4]
 const identity = (v: unknown): string => v + ''
 
 const Header = () => {
-  return <View style={styles.header}><Text>GOt here</Text></View>
+  return <View pointerEvents="box-none" style={styles.header}></View>
 }
 
 const Example: React.FC = () => {
+
+
   const renderItem: ListRenderItem<number> = React.useCallback(({ index }) => {
     return (
       <View style={[styles.box, index % 2 === 0 ? styles.boxB : styles.boxA]}><Text>Not sure</Text></View>
     )
+
+
   }, [])
 
   return (
     <Tabs.Container
+    
       renderHeader={Header}
       headerHeight={HEADER_HEIGHT} // optional
+      allowHeaderOverscroll={true}
+      
+      containerStyle={{
+        elevation:0,
+      borderTopWidth:0,
+      boxShadow: '0px 0px 0px rgba(0,0,0,0.0)'
+      }}
       renderTabBar={props => <MaterialTabBar {...props} 
           indicatorStyle={{ backgroundColor: 'red', maxWidth:5, height:5,borderRadius:100, left:'16%' }} 
-          
           activeColor = "red"
           inactiveColor ="green"
+          
           />}
       initialTabName="B" 
     >
