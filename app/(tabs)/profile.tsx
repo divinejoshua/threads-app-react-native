@@ -48,16 +48,17 @@ export default function  ProfileScreen () {
       }} />
 
 
-      {/* Scroll view  */}
-      <ScrollView
-        contentContainerStyle={{
-          paddingTop: Platform.select({ android: 30 }),
-          paddingHorizontal: 15,
-          marginTop: 10
-        }}
-      >
-        <Link href='/accounts/login'>Login page</Link>
-    </ScrollView>
+      {/* Profile card view  */}
+      <View style={{marginTop: -30}}>
+        <View style={styles.profileCard}>
+          <View style={[styles.cardItem, { flex: 3, borderWidth: 1 }]}>
+            {/* Content for the first element */}
+          </View>
+          <View style={[styles.cardItem, { flex: 7, borderWidth: 1 }]}>
+            {/* Content for the second element */}
+          </View>
+      </View>
+    </View>
     </SafeAreaView>
   )
 }
@@ -67,7 +68,6 @@ export default function  ProfileScreen () {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop:20,
         paddingLeft:20,
         paddingRight:20,
     },
@@ -79,6 +79,19 @@ const styles = StyleSheet.create({
       marginVertical: 30,
       height: 1,
       width: '80%',
+    },
+
+
+    //Profile card view
+    profileCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      // Set the container's width to take up the available space
+      width: '100%',
+    },
+    cardItem: {
+      height: 100, // Set the height as needed
     },
   });
   
