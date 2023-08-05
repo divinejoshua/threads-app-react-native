@@ -29,7 +29,7 @@ export default function ThreadItem({ thread }: TheradItemProps): JSX.Element {
 
     // Open post details
     const openPostDetaills = (threadId: string) => {
-      router.push('/posts/'+threadId);
+      router.push({ pathname: "/posts/[id]", params: { id: threadId } });
     }
   
 
@@ -248,7 +248,7 @@ function BottomIcons({threadId}: { threadId: string }) {
       </TouchableOpacity>
 
       {/* Comment button  */}
-      <TouchableOpacity style={styles.postButtons} onPress={()=> router.push('/posts/'+threadId)}>
+      <TouchableOpacity style={styles.postButtons} onPress={()=> router.push({ pathname: "/posts/[id]", params: { id: threadId } })}>
         <Ionicons name="chatbubble-outline" size={iconSize} color={iconColor}  />
       </TouchableOpacity>
 

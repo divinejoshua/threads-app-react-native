@@ -55,7 +55,7 @@ export default function  ProfileScreen () {
         <View style={styles.profileCard}>
 
           {/* Profile Image  */}
-          <View style={[styles.cardItem, { flex: 3, }]}>
+          <View style={[{ flex: 3, }]}>
             <Image 
               style={styles.profileImage}
               source={require('../../assets/images/profile.png')}
@@ -63,32 +63,39 @@ export default function  ProfileScreen () {
           </View>
 
           {/* Profile stats  */}
-          <View style={[styles.cardItem, { flex: 7, }]}>
+          <View style={[{ flex: 7, }]}>
               <View style={styles.profileStats}>
 
               {/* Followers */}
               <View style={styles.centeredView}>
                   <Link href={"/accounts/collapsible-tab"}><Text style={styles.statsHeader}>Followers</Text></Link>
-                 <Text style={styles.statsText}>89.2K</Text>
+                 <Text style={styles.statsText}>16.2M</Text>
               </View>
 
               {/* Followeing */}
               <View style={styles.centeredView}>
                 <Text style={styles.statsHeader}>Following</Text>
-                 <Text style={styles.statsText}>304</Text>
+                 <Text style={styles.statsText}>1,324</Text>
               </View>
 
               {/* Posts */}
               <View style={styles.centeredView}>
                 <Text style={styles.statsHeader}>Posts</Text>
-                 <Text style={styles.statsText}>554</Text>
+                 <Text style={styles.statsText}>10.1K</Text>
               </View>
               </View>
           </View>
 
+        </View>
 
 
-      </View>
+    {/* User name / Fullname  */}
+        <View style={{marginTop:20}}>
+            <Text style={{fontSize: 17, fontWeight:'600', }}>Eren Yeager <MaterialIcons name="verified" size={14} color="#60a5fa" /></Text> 
+            <Text style={{marginTop:5, color:'#aaaaaa', }}>@yeager</Text>
+          </View>
+
+
     </View>
     </SafeAreaView>
   )
@@ -118,12 +125,9 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      // Set the container's width to take up the available space
       width: '100%',
     },
-    cardItem: {
-      height: 100, // Set the height as needed
-    },
+    
     profileImage:{
       width: 70,
       height:70,
@@ -136,10 +140,10 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop:10
     },
     centeredView: {
       flex: 1,
+      justifyContent: 'center',
       alignItems: 'center',
     },
 
