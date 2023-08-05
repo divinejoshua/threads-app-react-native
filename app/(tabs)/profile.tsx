@@ -11,8 +11,6 @@ import Colors from '../../constants/Colors';
 import { Image } from 'expo-image';
 
 
-// Note: Docs on collasable tab view is found here :https://github.com/PedroBern/react-native-collapsible-tab-view
-
 // Global variables
 const HEADER_HEIGHT = 250
 const DATA = [0, 1, 2, 3, 4]
@@ -43,11 +41,17 @@ const ProfileTop = () => {
     
       
       return (
-        <View style={styles.container} pointerEvents='box-none'>
+
+        
+        <View style={styles.container} pointerEvents='none'>
           {/* Main  */}
+
+
+    
+    
           
           {/* Profile card view  */}
-          <View style={{}}>
+          <View pointerEvents='auto' style={{}}>
             {/* Profile card  */}
             <View style={styles.profileCard}>
     
@@ -64,7 +68,7 @@ const ProfileTop = () => {
                   <View style={styles.profileStats}>
     
                   {/* Followers */}
-                  <View style={styles.centeredView}>
+                  <View pointerEvents='box-none' style={styles.centeredView}>
                       <Link href={"/accounts/collapsible-tab"}><Text style={styles.statsHeader}>Followers</Text></Link>
                      <Text style={styles.statsText}>16.2M</Text>
                   </View>
@@ -109,14 +113,14 @@ const ProfileTop = () => {
               {isFollowing ?
       
                 //  If is following  
-                <Pressable onPress={()=> followUser()}  style={[styles.followingButton, {borderColor: borderColor}]}>
+                <TouchableOpacity onPress={()=> followUser()}  style={[styles.followingButton, {borderColor: borderColor}]}>
                   <Text style={styles.followButtonText}>Following</Text>
-                </Pressable>
+                </TouchableOpacity>
                 :
                 // If logged in user is not following
-                <Pressable onPress={()=> followUser()} style={[styles.followButton, {backgroundColor: "#3b82f6"}]}>
+                <TouchableOpacity onPress={()=> followUser()} style={[styles.followButton, {backgroundColor: "#3b82f6"}]}>
                     <Text style={[styles.followButtonText,{color:"#fff"}]}>Follow</Text>
-                </Pressable>
+                </TouchableOpacity>
               }
       
               {/* Message button  */}
@@ -147,47 +151,44 @@ export default function  ProfileScreen () {
    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
 
 
-  //  Image List 
   const imageListItem: ListRenderItem<number> = React.useCallback(({ index }) => {
     return (
       <View><Text>{index}</Text></View>
     )
+
+    
   }, [])
 
   
   return (
-    <SafeAreaView  style={[{backgroundColor: backgroundColor, flex: 1}]} >
-
-      {/* Stack screen  */}
+    <SafeAreaView  style={[{backgroundColor: backgroundColor, flex: 1}]} >    
+        {/* Stack screen  */}
         <Stack.Screen options={{
-            headerShadowVisible: false, 
-            headerBackTitle: 'Back',
-            headerTitle:'Profile',
-            headerStyle: {
-            backgroundColor: backgroundColor,
-          },
-          // Left header button
-          headerLeft: () => (
-            <TouchableOpacity style={{marginLeft:20}}>
-                <Feather  name="globe" size={18} color={textColor}/>
-            </TouchableOpacity>
-      
-          ),
+              headerShadowVisible: false, 
+              headerBackTitle: 'Back',
+              headerTitle:'Profile',
+              headerStyle: {
+              backgroundColor: backgroundColor,
+            },
+            // Left header button
+            headerLeft: () => (
+              <TouchableOpacity style={{marginLeft:20}}>
+                  <Feather  name="globe" size={18} color={textColor}/>
+              </TouchableOpacity>
+        
+            ),
 
-          // Right header button
-          headerRight: () => (
-            <TouchableOpacity style={{marginRight:20}}>
-                <Feather name="menu" size={18} color={textColor}/>
-            </TouchableOpacity>
+            // Right header button
+            headerRight: () => (
+              <TouchableOpacity style={{marginRight:20}}>
+                  <Feather  name="menu" size={18} color={textColor}/>
+              </TouchableOpacity>
 
-          ),
-          headerBackTitleStyle: {
-            fontSize:14
-          },
-        }} />
-    
-    
-
+            ),
+            headerBackTitleStyle: {
+              fontSize:14
+            },
+          }} />
 
         {/* Tab container  */}
        
@@ -196,31 +197,29 @@ export default function  ProfileScreen () {
             headerHeight={HEADER_HEIGHT} // optional
             allowHeaderOverscroll={true}
             headerContainerStyle={{
-              backgroundColor:backgroundColor,
               elevation: 0, // remove shadow on Android
               shadowOpacity: 0, // remove shadow on iOS
               shadowOffset: {
                   width: 0, height: 0 // for iOS
               },
-              borderBottomWidth:.5,
-              borderBottomColor:borderColor,
+              borderBottomWidth:0.5,
+              borderColor: borderColor,
+              marginTop:-50,
+             
             }}
             renderTabBar={props => <MaterialTabBar {...props} 
-                indicatorStyle={{ backgroundColor:textColor}} 
-                activeColor = {textColor}
-                inactiveColor = {borderColor}   
-                labelStyle = {{
-                  textTransform:'capitalize'
-                }}
+                indicatorStyle={{ backgroundColor:"#121212"}} 
+                
+                activeColor = "#121212"
+                inactiveColor ="#bcbcbc"
                 />}
-            initialTabName="Videos" 
+            initialTabName="B" 
           >
 
             {/* Photo tab  */}
             <Tabs.Tab 
-              name="Photos" 
-              label={() =>  <Feather  name="menu" size={18} color={textColor}/>}
-            
+            name="List 1" 
+            label={() =>  <Feather  name="menu" size={18} color={"#222"}/>}
             >
               <Tabs.FlatList
                 data={DATA}
@@ -229,7 +228,7 @@ export default function  ProfileScreen () {
             </Tabs.Tab>
 
             {/* Video Tab  */}
-            <Tabs.Tab name="Videos">
+            <Tabs.Tab name="B">
               <Tabs.ScrollView>
                 <View style={[styles.box, styles.boxA]} />
                 <View style={[styles.box, styles.boxB]} />
@@ -238,7 +237,7 @@ export default function  ProfileScreen () {
 
 
             {/* Tagged Tab  */}
-            <Tabs.Tab name="Tags">
+            <Tabs.Tab name="C">
               <Tabs.ScrollView>
                 <View style={[styles.box, styles.boxA]} />
                 <View style={[styles.box, styles.boxB]} />
@@ -256,7 +255,7 @@ const styles = StyleSheet.create({
     container: {
         paddingLeft:20,
         paddingRight:20,
-        marginTop: -30,
+        marginTop: 10,
         elevation: 0, // remove shadow on Android
         shadowOpacity: 0, // remove shadow on iOS
         shadowOffset: {
@@ -313,11 +312,10 @@ const styles = StyleSheet.create({
     },
 
     actionButtons:{
-      marginTop:20, 
+      marginTop:10, 
       flexDirection: 'row',
       width: '100%',
       gap:10,
-      marginBottom:10,
     },
 
     followingButton: {
