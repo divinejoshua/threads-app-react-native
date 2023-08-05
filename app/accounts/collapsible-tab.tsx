@@ -26,7 +26,8 @@ const Example: React.FC = () => {
       renderHeader={Header}
       headerHeight={HEADER_HEIGHT} // optional
       renderTabBar={props => <MaterialTabBar {...props} 
-          indicatorStyle={{ backgroundColor: 'red', width:1 }} 
+          indicatorStyle={{ backgroundColor: 'red', maxWidth:5, height:5,borderRadius:100, left:'16%' }} 
+          
           activeColor = "red"
           inactiveColor ="green"
           />}

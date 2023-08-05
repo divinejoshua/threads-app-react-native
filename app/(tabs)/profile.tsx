@@ -8,6 +8,7 @@ import { Platform, useColorScheme, StyleSheet, TouchableOpacity, Pressable } fro
 import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 import Colors from '../../constants/Colors';
+import { Image } from 'expo-image';
 
 export default function  ProfileScreen () {
     // Get theme 
@@ -21,7 +22,7 @@ export default function  ProfileScreen () {
     // Main 
     <SafeAreaView  style={[styles.container, {backgroundColor: backgroundColor, flex: 1,}]} >
        <Stack.Screen options={{
-         headerShadowVisible: true, 
+         headerShadowVisible: false, 
          headerBackTitle: 'Back',
          headerTitle:'Profile',
          headerStyle: {
@@ -50,13 +51,43 @@ export default function  ProfileScreen () {
 
       {/* Profile card view  */}
       <View style={{marginTop: -30}}>
+        {/* Profile card  */}
         <View style={styles.profileCard}>
-          <View style={[styles.cardItem, { flex: 3, borderWidth: 1 }]}>
-            {/* Content for the first element */}
+
+          {/* Profile Image  */}
+          <View style={[styles.cardItem, { flex: 3, }]}>
+            <Image 
+              style={styles.profileImage}
+              source={require('../../assets/images/profile.png')}
+            />
           </View>
-          <View style={[styles.cardItem, { flex: 7, borderWidth: 1 }]}>
-            {/* Content for the second element */}
+
+          {/* Profile stats  */}
+          <View style={[styles.cardItem, { flex: 7, }]}>
+              <View style={styles.profileStats}>
+
+              {/* Followers */}
+              <View style={styles.centeredView}>
+                  <Link href={"/accounts/collapsible-tab"}><Text style={styles.statsHeader}>Followers</Text></Link>
+                 <Text style={styles.statsText}>89.2K</Text>
+              </View>
+
+              {/* Followeing */}
+              <View style={styles.centeredView}>
+                <Text style={styles.statsHeader}>Following</Text>
+                 <Text style={styles.statsText}>304</Text>
+              </View>
+
+              {/* Posts */}
+              <View style={styles.centeredView}>
+                <Text style={styles.statsHeader}>Posts</Text>
+                 <Text style={styles.statsText}>554</Text>
+              </View>
+              </View>
           </View>
+
+
+
       </View>
     </View>
     </SafeAreaView>
@@ -92,6 +123,36 @@ const styles = StyleSheet.create({
     },
     cardItem: {
       height: 100, // Set the height as needed
+    },
+    profileImage:{
+      width: 70,
+      height:70,
+      borderRadius:100
+    },
+
+
+    // Profile stats 
+    profileStats: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop:10
+    },
+    centeredView: {
+      flex: 1,
+      height: 100,
+      alignItems: 'center',
+    },
+
+    statsHeader:{
+      color: '#bcbcbc',
+      fontWeight: "600",
+    },
+
+    statsText:{
+      fontWeight: "600",
+      fontSize: 16,
+      marginTop: 6
     },
   });
   
