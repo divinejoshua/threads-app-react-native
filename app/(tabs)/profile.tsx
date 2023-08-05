@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
     },
 
     actionButtons:{
-      marginTop:10, 
+      marginTop:20, 
       flexDirection: 'row',
       width: '100%',
       gap:10,
@@ -343,22 +343,5 @@ const styles = StyleSheet.create({
       fontWeight:'600'
     },
 
-
-    box: {
-      height: 250,
-      width: '100%',
-    },
-    boxA: {
-      backgroundColor: 'white',
-    },
-    boxB: {
-      backgroundColor: '#D8D8D8',
-    },
-    header: {
-      height: HEADER_HEIGHT,
-      width: '100%',
-      padding:100,
-      backgroundColor: '#2196f3',
-    },
   });
   
