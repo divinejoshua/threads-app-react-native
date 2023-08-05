@@ -181,8 +181,9 @@ export default function  ProfileScreen () {
             },
           }} />
 
+          
+
         {/* Tab container  */}
-       
           <Tabs.Container
             renderHeader={ProfileTop}
             headerHeight={HEADER_HEIGHT} // optional
