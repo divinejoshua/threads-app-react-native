@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Link, Stack, router } from 'expo-router'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Text, View } from '../../components/Themed';
-import { useColorScheme, StyleSheet, Pressable, ListRenderItem } from 'react-native';
+import { useColorScheme, StyleSheet, Pressable, ListRenderItem, Dimensions } from 'react-native';
 import { MaterialTabBar, Tabs } from 'react-native-collapsible-tab-view'
 import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
@@ -13,7 +13,9 @@ import { Image } from 'expo-image';
 
 // Global variables
 const HEADER_HEIGHT = 450
-const DATA = [0, 1, 2, 3, 4]
+const PHOTOS_TAB = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+const VIDEOS_TAB = [15,14,13,12,11,10,9,8,7,6,5,4]
+const TAGS_TAB = [16,17,18,14,20,21,22,23,24,25]
 
 
 
@@ -143,19 +145,16 @@ export default function  ProfileScreen () {
 
 
   //  Image list component 
-  const imageListItem: ListRenderItem<number> = React.useCallback(({ index }) => {
+  const imageListItem: ListRenderItem<number> = React.useCallback(({ item,index }) => {
+
+    const imageSize = Dimensions.get('window').width / 2 - 10;
+
+
     return (
-      <View style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingVertical: 8,
-        borderRadius: 7,
-        flex:5,
-        width: 100,
-        borderWidth: 1,
-        }}>
-        <Text>{index}</Text>
-      </View>
+      <View style={[styles.gridImageContainer,  { width: imageSize, height: imageSize }]}>
+          <Image source={{ uri : `https://picsum.photos/500/300?image=${item * 5 + 10}`}} style={styles.gridImage} />
+    </View>
+
     )
 
     
@@ -208,7 +207,7 @@ export default function  ProfileScreen () {
               backgroundColor:backgroundColor,
               borderBottomWidth:0.5,
               borderColor: borderColor,
-              marginTop:-10,
+              marginTop:-50,
             
              
             }}
@@ -228,36 +227,44 @@ export default function  ProfileScreen () {
 
             {/* Photo tab  */}
             <Tabs.Tab 
-            name="Photos" 
+              name="Photos" 
             // label={() =>  <Feather  name="menu" size={18} color={"#222"}/>}
             >
               <Tabs.FlatList
-                data={DATA}
+                data={PHOTOS_TAB}
                 renderItem={imageListItem}
+                numColumns={2}
                 style={{
-                  flexDirection:'row',
-                  width: '100%',
-                  gap:10,
+                  marginTop:-50,
                 }}
               />
-
             </Tabs.Tab>
+
+
 
             {/* Video Tab  */}
             <Tabs.Tab name="Videos">
-              <Tabs.ScrollView>
-                {/* <View style={[styles.box, styles.boxA]} /> */}
-                {/* <View style={[styles.box, styles.boxB]} /> */}
-              </Tabs.ScrollView>
+                <Tabs.FlatList
+                    data={VIDEOS_TAB}
+                    renderItem={imageListItem}
+                    numColumns={2}
+                    style={{
+                      marginTop:-50,
+                    }}
+                  />
             </Tabs.Tab>
 
 
             {/* Tagged Tab  */}
             <Tabs.Tab name="Tags">
-              <Tabs.ScrollView>
-                {/* <View style={[styles.box, styles.boxA]} /> */}
-                {/* <View style={[styles.box, styles.boxB]} /> */}
-              </Tabs.ScrollView>
+                <Tabs.FlatList
+                    data={TAGS_TAB}
+                    renderItem={imageListItem}
+                    numColumns={2}
+                    style={{
+                      marginTop:-50,
+                    }}
+                  />
             </Tabs.Tab>
           </Tabs.Container>
       </SafeAreaView>
@@ -356,6 +363,17 @@ const styles = StyleSheet.create({
     },
     followButtonText: {
       fontWeight:'600'
+    },
+    
+    gridImageContainer: {
+      flex: 1,
+      margin: 5,
+    },
+    gridImage: {
+      flex: 1,
+      width:'100%',
+      height:'auto',
+      borderRadius: 2,
     },
 
   });
