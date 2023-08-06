@@ -145,7 +145,17 @@ export default function  ProfileScreen () {
   //  Image list component 
   const imageListItem: ListRenderItem<number> = React.useCallback(({ index }) => {
     return (
-      <View><Text>{index}</Text></View>
+      <View style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 8,
+        borderRadius: 7,
+        flex:5,
+        width: 100,
+        borderWidth: 1,
+        }}>
+        <Text>{index}</Text>
+      </View>
     )
 
     
@@ -198,7 +208,7 @@ export default function  ProfileScreen () {
               backgroundColor:backgroundColor,
               borderBottomWidth:0.5,
               borderColor: borderColor,
-              marginTop:-50,
+              marginTop:-10,
             
              
             }}
@@ -224,6 +234,11 @@ export default function  ProfileScreen () {
               <Tabs.FlatList
                 data={DATA}
                 renderItem={imageListItem}
+                style={{
+                  flexDirection:'row',
+                  width: '100%',
+                  gap:10,
+                }}
               />
 
             </Tabs.Tab>
