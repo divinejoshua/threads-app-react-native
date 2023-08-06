@@ -62,14 +62,14 @@ const ProfileTop = () => {
               <View style={styles.profileStats}>
 
               {/* Followers */}
-              <Pressable onPress={()=> router.push("/accounts/collapsible-tab")} style={styles.centeredView} >
+              <View style={styles.centeredView} >
                   <Text style={styles.statsHeader}>Followers</Text>
                   <Text style={styles.statsText}>16.2M</Text>
-              </Pressable>
+              </View>
 
               {/* Followeing */}
               <View style={styles.centeredView} >
-              <Link href="/accounts/collapse-tab2"><Text style={styles.statsHeader}>Following</Text></Link>
+                <Text style={styles.statsHeader}>Following</Text>
                  <Text style={styles.statsText}>1,324</Text>
               </View>
 
@@ -198,6 +198,9 @@ export default function  ProfileScreen () {
             renderHeader={ProfileTop}
             headerHeight={HEADER_HEIGHT} // optional
             allowHeaderOverscroll={true}
+            containerStyle={{
+              marginBottom:-60
+            }}
             headerContainerStyle={{
               elevation: 0, // remove shadow on Android
               shadowOpacity: 0, // remove shadow on iOS
@@ -207,9 +210,7 @@ export default function  ProfileScreen () {
               backgroundColor:backgroundColor,
               borderBottomWidth:0.5,
               borderColor: borderColor,
-              marginTop:-50,
-            
-             
+              marginTop:-40,
             }}
             // This part targets the tabs header links
             renderTabBar={props => <MaterialTabBar {...props} 
@@ -236,6 +237,7 @@ export default function  ProfileScreen () {
                 numColumns={2}
                 style={{
                   marginTop:-50,
+                  marginBottom:30
                 }}
               />
             </Tabs.Tab>
@@ -243,13 +245,14 @@ export default function  ProfileScreen () {
 
 
             {/* Video Tab  */}
-            <Tabs.Tab name="Videos">
+            <Tabs.Tab name="Videos" >
                 <Tabs.FlatList
                     data={VIDEOS_TAB}
                     renderItem={imageListItem}
                     numColumns={2}
                     style={{
                       marginTop:-50,
+                      marginBottom:30
                     }}
                   />
             </Tabs.Tab>
@@ -263,6 +266,7 @@ export default function  ProfileScreen () {
                     numColumns={2}
                     style={{
                       marginTop:-50,
+                      marginBottom:30
                     }}
                   />
             </Tabs.Tab>
