@@ -20,7 +20,7 @@ const DATA = [0, 1, 2, 3, 4]
 // Top part of profile page 
 const ProfileTop = () => {
 
-    const currentTheme = useColorScheme();
+  const currentTheme = useColorScheme();
   const backgroundColor = currentTheme === "light" ? Colors.light.background :Colors.dark.background
   const textColor = currentTheme === "light" ? Colors.light.text :Colors.dark.text
   const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
