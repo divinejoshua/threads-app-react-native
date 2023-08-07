@@ -141,6 +141,26 @@ export default function  ProfileScreen () {
    const borderColor = currentTheme === "light" ? Colors.light.borderColor :Colors.dark.borderColor
 
 
+  //  Data 
+  const [isRefreshing, setisRefreshing] = useState<boolean>(false)
+
+    
+
+
+
+  // Loading functionality 
+  const refreshPage = () => {
+    // Set loading to true 
+    setisRefreshing(true)
+
+    // Set Loading back to false after a few seconds 
+    setTimeout(() => {
+      setisRefreshing(false);
+    }, 2000);
+  }
+
+
+
   //  Image list component 
   const imageListItem: ListRenderItem<number> = React.useCallback(({ item,index }) => {
 
@@ -157,7 +177,9 @@ export default function  ProfileScreen () {
     
   }, [])
 
-  
+
+
+
   return (
     <SafeAreaView  style={[{backgroundColor: backgroundColor, flex: 1}]} >    
         {/* Stack screen  */}
@@ -232,7 +254,7 @@ export default function  ProfileScreen () {
                 data={PHOTOS_TAB}
                 renderItem={imageListItem}
                 numColumns={2}
-                refreshControl={<RefreshControl refreshing={false} onRefresh={()=> console.log("Omo")} />}
+                refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refreshPage} />}
                 style={{
                   marginTop:-50,
                 }}
