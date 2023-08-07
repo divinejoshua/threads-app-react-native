@@ -233,14 +233,14 @@ export default function  ProfileScreen () {
             }}
             // This part targets the tabs header links
             renderTabBar={props => <MaterialTabBar {...props} 
-                  indicatorStyle={{ backgroundColor:textColor, height:1}} 
-                  activeColor ={textColor}
-                  inactiveColor ="#999"
-                  labelStyle={{
-                    textTransform: "capitalize",
-                    fontWeight:'600',
-                  }}
-                />}
+                indicatorStyle={{ backgroundColor:textColor, height:1}} 
+                activeColor ={textColor}
+                inactiveColor ="#999"
+                labelStyle={{
+                  textTransform: "capitalize",
+                  fontWeight:'600',
+                }}
+              />}
                 
             initialTabName="Photos" //Initial tab name to start from
           >
