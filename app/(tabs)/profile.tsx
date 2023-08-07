@@ -269,6 +269,7 @@ export default function  ProfileScreen () {
                     data={VIDEOS_TAB}
                     renderItem={imageListItem}
                     numColumns={2}
+                    refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refreshPage} />}
                     style={{
                       marginTop:-50,
                     }}
@@ -281,6 +282,7 @@ export default function  ProfileScreen () {
                 <Tabs.FlatList
                     data={TAGS_TAB}
                     renderItem={imageListItem}
+                    refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refreshPage} />}
                     numColumns={2}
                     style={{
                       marginTop:-50,
