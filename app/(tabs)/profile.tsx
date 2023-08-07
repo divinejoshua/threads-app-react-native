@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Link, Stack, router } from 'expo-router'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Text, View } from '../../components/Themed';
-import { useColorScheme, StyleSheet, Pressable, ListRenderItem, Dimensions,RefreshControl } from 'react-native';
+import { useColorScheme, StyleSheet, Pressable, ListRenderItem, Dimensions, RefreshControl } from 'react-native';
 import { MaterialTabBar, Tabs } from 'react-native-collapsible-tab-view'
 import { AntDesign, Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
@@ -33,13 +33,14 @@ const ProfileTop = () => {
   // follow user / unfollow user 
   const followUser = () =>{
     setisFollowing((prevIsLiked) => !prevIsLiked);
+    // Haptic effect
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
   }
 
   return (
 
     // Profile top 
-    <View  pointerEvents="box-none" style={styles.container}  >
+    <View  pointerEvents="box-none" style={styles.container} >
 
       {/* Profile card view  */}
         {/* Profile card  */}
@@ -167,7 +168,6 @@ export default function  ProfileScreen () {
               headerStyle: {
               backgroundColor: backgroundColor,
             },
-            
             // Left header button
             headerLeft: () => (
               <TouchableOpacity style={{marginLeft:20}}>
@@ -232,6 +232,7 @@ export default function  ProfileScreen () {
                 data={PHOTOS_TAB}
                 renderItem={imageListItem}
                 numColumns={2}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={()=> console.log("Omo")} />}
                 style={{
                   marginTop:-50,
                 }}
