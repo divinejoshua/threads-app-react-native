@@ -156,7 +156,7 @@ export default function  ProfileScreen () {
     // Set Loading back to false after a few seconds 
     setTimeout(() => {
       setisRefreshing(false);
-    }, 2000);
+    }, 1000);
   }
 
 
