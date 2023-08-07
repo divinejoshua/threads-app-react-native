@@ -33,11 +33,7 @@ const ProfileTop = () => {
   // follow user / unfollow user 
   const followUser = () =>{
     setisFollowing((prevIsLiked) => !prevIsLiked);
-
-    // Only vibrate when the user is following 
-    if(isFollowing===false){
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-    }
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
   }
 
   return (
@@ -199,7 +195,7 @@ export default function  ProfileScreen () {
             headerHeight={HEADER_HEIGHT} // optional
             allowHeaderOverscroll={true}
             containerStyle={{
-              marginBottom:-60
+              marginBottom:-35
             }}
             headerContainerStyle={{
               elevation: 0, // remove shadow on Android
@@ -237,7 +233,6 @@ export default function  ProfileScreen () {
                 numColumns={2}
                 style={{
                   marginTop:-50,
-                  marginBottom:30
                 }}
               />
             </Tabs.Tab>
@@ -252,7 +247,6 @@ export default function  ProfileScreen () {
                     numColumns={2}
                     style={{
                       marginTop:-50,
-                      marginBottom:30
                     }}
                   />
             </Tabs.Tab>
@@ -266,7 +260,6 @@ export default function  ProfileScreen () {
                     numColumns={2}
                     style={{
                       marginTop:-50,
-                      marginBottom:30
                     }}
                   />
             </Tabs.Tab>
@@ -371,7 +364,7 @@ const styles = StyleSheet.create({
     
     gridImageContainer: {
       flex: 1,
-      margin: 5,
+      margin: 1,
     },
     gridImage: {
       flex: 1,
