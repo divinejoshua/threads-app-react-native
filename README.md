@@ -3,6 +3,12 @@ This is a UI clone of the Threads app by Meta (facebook) built with react native
 
 ## Screenshots
 ![Alt Text](assets/images/IMG_8121.PNG)
+![Alt Text](assets/images/IMG_8122.PNG)
+![Alt Text](assets/images/IMG_8123.PNG)
+![Alt Text](assets/images/IMG_8124.PNG)
+![Alt Text](assets/images/IMG_8125.PNG)
+![Alt Text](assets/images/IMG_8126.PNG)
+![Alt Text](assets/images/IMG_8127.PNG)
 
 
 ## Project setup
