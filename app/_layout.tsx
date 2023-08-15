@@ -49,6 +49,8 @@ function RootLayoutNav() {
 
   return (
     <>
+
+    
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <ThreadProvdier>
           <Stack>
